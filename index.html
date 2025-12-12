@@ -173,6 +173,35 @@
       height: 750px !important;
       transform: translateX(40px); /* geser sedikit ke kanan */
     }
+    @media (max-width: 768px) {
+  /* Ubah hero section menjadi kolom vertikal */
+  .hero .row {
+    flex-direction: column-reverse; /* teks di bawah, model 3D di atas */
+    align-items: center;
+  }
+
+  /* Margin untuk teks agar tidak terlalu rapat */
+  .hero-text {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .btn-group-custom {
+    justify-content: center;
+  }
+  /* Atur ukuran teks agar mobile friendly */
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -210,8 +239,8 @@
       <h1>Hello</h1>
       <h2>I'M <span id="typing" style="color:#c084fc"></span></h2>
       <p>
-        Saya seorang junior web developer yang fokus pada tampilan modern, clean,
-        dan responsif. Membangun website yang cepat dan mudah digunakan.
+        Junior IT Support student in Computer & Network Engineering (TKJ) with skills in network setup, basic troubleshooting (Cisco Packet Tracer, Mikrotik) ⚙️, 
+        and web development (HTML, CSS, JS, Bootstrap) 💻. Patient, communicative, and detail-oriented 😊, passionate about networking and IT 🌐.
       </p>
       <div class="btn-group-custom mt-3">
         <a href="#projects" class="btn-project">Project</a>
