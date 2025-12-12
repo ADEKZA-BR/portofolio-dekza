@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a002e);
+      color: #ffffff;
+    }
+    header {
+      background: rgba(20, 20, 20, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+    }
+    .hero-text h1 {
+      font-size: 3.6rem;
+      font-weight: bold;
+    }
+
+    /* UPDATED */
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .hero-text h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 450px;
+    }
+    .hero-img img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 20px;
+    }
+      .navbar-nav .nav-link {
+      color: #ffffff !important;
+    }
+    .navbar-brand {
+      color: #ffffff !important;
+    }
+    .navbar-nav .nav-link {
+      color: #ffffff !important;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+
+    /* Hover modern underline animation */
+    .navbar-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: #a855f7;
+      transition: width 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #c084fc !important;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    .btn-group-custom {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* PROJECT BUTTON */
+    .btn-project {
+      padding: 10px 22px;
+      background: #a855f7;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    .btn-project:hover {
+      background: #c084fc;
+      transform: translateY(-3px);
+    }
+
+    /* GITHUB BUTTON (blur) */
+    .btn-github {
+      padding: 10px 22px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    /* RANDOM COLOR BLOBS (FIXED, NOT MOVING) */
+    .bg-blob {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      filter: blur(120px);
+      opacity: 0.55;
+      z-index: -1;
+    }
+    .blob1 { background: #7b1fa2; top: 5%; left: 10%; }
+    .blob2 { background: #4a148c; top: 40%; right: 15%; }
+    .blob3 { background: #9c27b0; bottom: 10%; left: 25%; }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+
+    .hero-text h2 {
+      font-size: 2.6rem;
+      font-weight: 700;
+    }
+
+    .spline-wrapper {
+      width: 100%;
+      height: 520px; /* lebih tinggi agar tidak terpotong */
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-end; /* geser model ke kanan */
+      align-items: center;
+    }
+
+    .spline-wrapper spline-viewer {
+      width: 650px; /* lebih besar agar tidak terpotong */
+      height: 650px;
+      transform: translateX(40px); /* geser tambahan untuk menyembunyikan logo */
+    }
+
+    .spline-big {
+      width: 100%;
+      height: 600px;
+      display: flex;
+      justify-content: flex-end; /* geser ke kanan */
+      align-items: center;
+      overflow: hidden;
+    }
+    .spline-big spline-viewer {
+      width: 750px !important;
+      height: 750px !important;
+      transform: translateX(40px); /* geser sedikit ke kanan */
+    }
+</style>
+</head>
+<body>
+
+  <!-- FIXED COLOR BLOBS -->
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+<!-- NAVIGATION -->
+<header>
+  <nav class="navbar navbar-expand-lg container">
+    <a class="navbar-brand fw-bold" href="#">MyPortfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Project</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero container">
+  <div class="row w-100 align-items-center">
+
+    <!-- TEXT LEFT -->
+    <div class="col-md-6 hero-text">
+      <h1>Hello</h1>
+      <h2>I'M <span id="typing" style="color:#c084fc"></span></h2>
+      <p>
+        Saya seorang junior web developer yang fokus pada tampilan modern, clean,
+        dan responsif. Membangun website yang cepat dan mudah digunakan.
+      </p>
+      <div class="btn-group-custom mt-3">
+        <a href="#projects" class="btn-project">Project</a>
+        <a href="https://github.com/" target="_blank" class="btn-github">GitHub</a>
+      </div>
+    </div>
+
+    <!-- IMAGE RIGHT -->
+    <div class="col-md-6 hero-img text-center">
+        <div class="spline-big">
+            <spline-viewer url="https://prod.spline.design/c7shorXcWXi-NdKl/scene.splinecode"></spline-viewer>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="container py-5">
+  <h2 class="fw-bold mb-3">About Me</h2>
+  <p>Sedikit deskripsi tentang kamu bisa ditaruh di sini.</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="container py-5">
+  <h2 class="fw-bold mb-3">Skills</h2>
+  <p>Daftar kemampuan kamu.</p>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="container py-5">
+  <h2 class="fw-bold mb-3">Projects</h2>
+  <p>Beberapa contoh project kamu.</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="container py-5">
+  <h2 class="fw-bold mb-3">Contact</h2>
+  <p>Tempat untuk kontak.</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// TEXT ANIMATION TYPEWRITER
+const roles = ["WEB DEVELOPER", "UI DESIGNER", "JUNIOR IT SUPPORT"]; 
+let index = 0;
+let charIndex = 0;
+let element = document.getElementById("typing");
+let deleting = false;
+
+function typeEffect() {
+  let current = roles[index];
+
+  if (!deleting) {
+    element.textContent = current.substring(0, charIndex++);
+    if (charIndex > current.length) {
+      deleting = true;
+      setTimeout(typeEffect, 1500);
+      return;
+    }
+  } else {
+    element.textContent = current.substring(0, charIndex--);
+    if (charIndex < 0) {
+      deleting = false;
+      index = (index + 1) % roles.length;
+      charIndex = 0;
+    }
+  }
+  setTimeout(typeEffect, deleting ? 60 : 90);
+}
+
+typeEffect();
+</script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.13/build/spline-viewer.js"></script>
+</body>
+</html>
