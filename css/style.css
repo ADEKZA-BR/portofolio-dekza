@@ -124,20 +124,20 @@ header {
 .blob3 { background: #9c27b0; bottom: 10%; left: 25%; }
 
 /* ================= SPLINE ================= */
-.spline-big {
-  width: 100%;
-  height: 600px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  overflow: hidden;
-}
+.spline-wrapper {
+      width: 100%;
+      height: 520px; /* lebih tinggi agar tidak terpotong */
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-end; /* geser model ke kanan */
+      align-items: center;
+    }
 
-.spline-big spline-viewer {
-  width: 750px;
-  height: 750px;
-  transform: translateX(40px);
-}
+    .spline-wrapper spline-viewer {
+      width: 650px; /* lebih besar agar tidak terpotong */
+      height: 650px;
+      transform: translateX(40px); /* geser tambahan untuk menyembunyikan logo */
+    }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
@@ -162,7 +162,7 @@ header {
     max-width: 100%;
   }
 
-  .spline-big {
+  /* .spline-big {
     height: 420px;
     justify-content: center;
   }
@@ -171,5 +171,5 @@ header {
     width: 420px;
     height: 420px;
     transform: none;
-  }
+  } */
 }
