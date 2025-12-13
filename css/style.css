@@ -1,0 +1,175 @@
+/* ================= BASE ================= */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0a0a0a, #1a002e);
+  color: #ffffff;
+}
+
+section {
+  scroll-margin-top: 90px;
+}
+
+/* ================= NAVBAR ================= */
+header {
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand,
+.nav-link {
+  color: #ffffff !important;
+}
+
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #a855f7;
+  transition: width 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ================= HERO ================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.hero-text h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #c084fc;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  max-width: 450px;
+}
+
+/* ================= BUTTONS ================= */
+.btn-group-custom {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-project {
+  padding: 10px 22px;
+  background: #a855f7;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-project:hover {
+  background: #c084fc;
+  transform: translateY(-3px);
+}
+
+.btn-github {
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-github:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+/* ================= BACKGROUND BLOBS ================= */
+.bg-blob {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  filter: blur(120px);
+  opacity: 0.55;
+  z-index: -1;
+}
+
+.blob1 { background: #7b1fa2; top: 5%; left: 10%; }
+.blob2 { background: #4a148c; top: 40%; right: 15%; }
+.blob3 { background: #9c27b0; bottom: 10%; left: 25%; }
+
+/* ================= SPLINE ================= */
+.spline-big {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.spline-big spline-viewer {
+  width: 750px;
+  height: 750px;
+  transform: translateX(40px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .hero .row {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .hero-text {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .btn-group-custom {
+    justify-content: center;
+  }
+
+  .hero-text h1 { font-size: 2.4rem; }
+  .hero-text h2 { font-size: 1.8rem; }
+  .hero-text p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .spline-big {
+    height: 420px;
+    justify-content: center;
+  }
+
+  .spline-big spline-viewer {
+    width: 420px;
+    height: 420px;
+    transform: none;
+  }
+}
