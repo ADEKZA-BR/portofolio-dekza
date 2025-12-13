@@ -1,278 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0a0a0a, #1a002e);
-      color: #ffffff;
-    }
-    header {
-      background: rgba(20, 20, 20, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 60px 0;
-    }
-    .hero-text h1 {
-      font-size: 3.6rem;
-      font-weight: bold;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Section Test</title>
 
-    /* UPDATED */
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-    .hero-text h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    .hero-text p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 450px;
-    }
-    .hero-img img {
-      width: 100%;
-      max-width: 380px;
-      border-radius: 20px;
-    }
-      .navbar-nav .nav-link {
-      color: #ffffff !important;
-    }
-    .navbar-brand {
-      color: #ffffff !important;
-    }
-    .navbar-nav .nav-link {
-      color: #ffffff !important;
-      position: relative;
-      padding-bottom: 4px;
-      transition: color 0.3s ease;
-    }
+<style>
+/* ===== BASE ===== */
+body {
+  background: linear-gradient(135deg, #0a0a0a, #1a002e);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
 
-    /* Hover modern underline animation */
-    .navbar-nav .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 2px;
-      background: #a855f7;
-      transition: width 0.3s ease;
-      border-radius: 5px;
-    }
+/* ===== ABOUT IMAGE ===== */
+.about-img {
+  position: relative;
+  width: 380px;
+  margin: auto;
+}
 
-    .navbar-nav .nav-link:hover {
-      color: #c084fc !important;
-    }
+.about-img::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #a855f7;
+  border-radius: 20px;
+  z-index: 1;
+  opacity: 0.85;
+}
 
-    .navbar-nav .nav-link:hover::after {
-      width: 100%;
-    }
-    .btn-group-custom {
-      display: flex;
-      gap: 15px;
-    }
+/* ===== FLIP CARD ===== */
+.about-card {
+  width: 100%;
+  height: 480px;
+  perspective: 1000px;
+  position: relative;
+  z-index: 2;
+}
 
-    /* PROJECT BUTTON */
-    .btn-project {
-      padding: 10px 22px;
-      background: #a855f7;
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s ease;
-    }
-    .btn-project:hover {
-      background: #c084fc;
-      transform: translateY(-3px);
-    }
+.about-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  border-radius: 20px;
+}
 
-    /* GITHUB BUTTON (blur) */
-    .btn-github {
-      padding: 10px 22px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-weight: 600;
-      transition: 0.3s ease;
-    }
-    .btn-github:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-    /* RANDOM COLOR BLOBS (FIXED, NOT MOVING) */
-    .bg-blob {
-      position: fixed;
-      width: 350px;
-      height: 350px;
-      filter: blur(120px);
-      opacity: 0.55;
-      z-index: -1;
-    }
-    .blob1 { background: #7b1fa2; top: 5%; left: 10%; }
-    .blob2 { background: #4a148c; top: 40%; right: 15%; }
-    .blob3 { background: #9c27b0; bottom: 10%; left: 25%; }
+.about-card:hover .about-card-inner {
+  transform: rotateY(180deg);
+}
 
-    .hero-text h1 {
-      font-size: 4rem;
-      font-weight: bold;
-    }
+.about-front,
+.about-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
 
-    .hero-text h2 {
-      font-size: 2.6rem;
-      font-weight: 700;
-    }
+/* FRONT */
+.about-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    .spline-wrapper {
-      width: 100%;
-      height: 520px; /* lebih tinggi agar tidak terpotong */
-      overflow: hidden;
-      display: flex;
-      justify-content: flex-end; /* geser model ke kanan */
-      align-items: center;
-    }
+/* BACK */
+.about-back {
+  background: rgba(20, 20, 20, 0.95);
+  transform: rotateY(180deg);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-    .spline-wrapper spline-viewer {
-      width: 650px; /* lebih besar agar tidak terpotong */
-      height: 650px;
-      transform: translateX(40px); /* geser tambahan untuk menyembunyikan logo */
-    }
+.about-back h4 {
+  color: #c084fc;
+  margin-bottom: 18px;
+}
 
+.about-back p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.about-back span {
+  color: #a855f7;
+  font-weight: 600;
+}
+
+/* ===== ABOUT TEXT ===== */
+.about-text h2 {
+  font-size: 2.3rem;
+  margin-bottom: 22px;
+  position: relative;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.about-text h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 55px;
+  height: 3px;
+  background: #a855f7;
+  transition: width 0.3s ease;
+}
+
+.about-text h2:hover {
+  color: #c084fc;
+}
+
+.about-text h2:hover::after {
+  width: 100%;
+}
+
+/* ===== PARAGRAPH HOVER ===== */
+.about-desc {
+  line-height: 1.9;
+  margin-bottom: 16px;
+  color: #e5e5e5;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.about-desc:hover {
+  transform: translateX(6px);
+  color: #ffffff;
+}
+
+/* ===== PURPLE TEXT + UNDERLINE HOVER ===== */
+.about-desc span {
+  color: #c084fc;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+
+.about-desc span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #a855f7;
+  transition: width 0.3s ease;
+}
+
+.about-desc span:hover::after {
+  width: 100%;
+}
+
+/* ===== TAGS ===== */
+.about-tags {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.about-tags span {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.about-tags span:hover {
+  background: #a855f7;
+  color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(168,85,247,0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .about-text {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .about-text h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .about-tags {
+    justify-content: center;
+  }
+}
 </style>
 </head>
+
 <body>
 
-  <!-- FIXED COLOR BLOBS -->
-  <div class="bg-blob blob1"></div>
-  <div class="bg-blob blob2"></div>
-  <div class="bg-blob blob3"></div>
+<section class="container py-5">
+  <div class="row align-items-center">
 
-<!-- NAVIGATION -->
-<header>
-  <nav class="navbar navbar-expand-lg container">
-    <a class="navbar-brand fw-bold" href="#">MyPortfolio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Project</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
+    <!-- FOTO FLIP -->
+    <div class="col-md-5 text-center">
+      <div class="about-img">
+        <div class="about-card">
+          <div class="about-card-inner">
 
-<!-- HERO SECTION -->
-<section id="home" class="hero container">
-  <div class="row w-100 align-items-center">
+            <div class="about-front">
+              <img src="pict/FOTO ADEKZA.png" alt="Profile">
+            </div>
 
-    <!-- TEXT LEFT -->
-    <div class="col-md-6 hero-text">
-      <h1>Hello</h1>
-      <h2>I'M <span id="typing" style="color:#c084fc"></span></h2>
-      <p>
-        Saya seorang junior web developer yang fokus pada tampilan modern, clean,
-        dan responsif. Membangun website yang cepat dan mudah digunakan.
-      </p>
-      <div class="btn-group-custom mt-3">
-        <a href="#projects" class="btn-project">Project</a>
-        <a href="https://github.com/" target="_blank" class="btn-github">GitHub</a>
+            <div class="about-back">
+              <h4>Personal Info</h4>
+              <p><span>Name:</span> Adekza</p>
+              <p><span>Age:</span> 16</p>
+              <p><span>Location:</span> Indonesia</p>
+              <p><span>Email:</span> example@email.com</p>
+              <p><span>Phone:</span> +62 xxxx xxxx</p>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- IMAGE RIGHT -->
-    <div class="col-md-6 hero-img text-center">
-      
-      <div class="spline-wrapper">
-        <spline-viewer url="https://prod.spline.design/c7shorXcWXi-NdKl/scene.splinecode"></spline-viewer>
+    <!-- TEXT -->
+    <div class="col-md-7 about-text">
+      <h2>About Me</h2>
+
+      <p class="about-desc">
+        I am a <span>Junior IT Support</span> student majoring in
+        <span>Computer and Network Engineering</span> with a strong interest
+        in networking and technology.
+      </p>
+
+      <p class="about-desc">
+        Experienced in <span>network installation</span>,
+        <span>basic troubleshooting</span>, and using
+        <span>Cisco Packet Tracer</span> and <span>Mikrotik</span>.
+      </p>
+
+      <p class="about-desc">
+        I also enjoy <span>front-end web development</span> and building
+        <span>responsive</span> and <span>user-friendly</span> interfaces.
+      </p>
+
+      <div class="about-tags">
+        <span>Networking</span>
+        <span>IT Support</span>
+        <span>Web Development</span>
+        <span>Troubleshooting</span>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="container py-5">
-  <h2 class="fw-bold mb-3">About Me</h2>
-  <p>Sedikit deskripsi tentang kamu bisa ditaruh di sini.</p>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="container py-5">
-  <h2 class="fw-bold mb-3">Skills</h2>
-  <p>Daftar kemampuan kamu.</p>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="container py-5">
-  <h2 class="fw-bold mb-3">Projects</h2>
-  <p>Beberapa contoh project kamu.</p>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="container py-5">
-  <h2 class="fw-bold mb-3">Contact</h2>
-  <p>Tempat untuk kontak.</p>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// TEXT ANIMATION TYPEWRITER
-const roles = ["WEB DEVELOPER", "UI DESIGNER", "JUNIOR IT SUPPORT"]; 
-let index = 0;
-let charIndex = 0;
-let element = document.getElementById("typing");
-let deleting = false;
-
-function typeEffect() {
-  let current = roles[index];
-
-  if (!deleting) {
-    element.textContent = current.substring(0, charIndex++);
-    if (charIndex > current.length) {
-      deleting = true;
-      setTimeout(typeEffect, 1500);
-      return;
-    }
-  } else {
-    element.textContent = current.substring(0, charIndex--);
-    if (charIndex < 0) {
-      deleting = false;
-      index = (index + 1) % roles.length;
-      charIndex = 0;
-    }
-  }
-  setTimeout(typeEffect, deleting ? 60 : 90);
-}
-
-typeEffect();
-</script>
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.13/build/spline-viewer.js"></script>
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.13/build/spline-viewer.js"></script>
 </body>
 </html>
