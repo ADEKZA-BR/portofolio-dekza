@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar Gradient</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .navbar-custom {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        /* Gradient miring ke kiri */
+        .navbar-custom::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 35%;
+            min-width: 200px;
+            max-width: 420px;
+            background: linear-gradient(135deg, #052659, #5483b3);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+            z-index: -1;
+        }
+
+        /* Mobile adjustment */
+        @media (max-width: 576px) {
+            .navbar-custom::after {
+                width: 55%;
+                clip-path: polygon(35% 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        .nav-link {
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        /* Search bar dengan animasi */
+        .search-bar {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-15px);
+            background: #f8f9fa;
+            padding: 0 10px;
+            transition: all 0.5s ease;
+        }
+
+        .search-bar.show {
+            max-height: 100px;
+            opacity: 1;
+            transform: translateY(0);
+            padding: 10px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+        }
+
+        /* Tombol Booking */
+        .btn-booking {
+            background: #7da0c4;
+            border: none;
+            color: #fff !important;
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-booking:hover {
+            background: #052659;
+            color: #fff !important;
+        }
+
+        /* Tombol Search */
+        .btn-search {
+            background: white;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-search:hover {
+            background: #f0f0f0;
+        }
+
+        #hero {
+            position: relative;
+        }
+
+        .hero-slide {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Teks kiri */
+        .hero-text {
+            margin-left: 40px;
+            /* geser ke kanan */
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.2rem;
+            /* lebih kecil */
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+            /* lebih kecil */
+        }
+
+        /* Polaroid overlay */
+        .polaroid-overlay {
+            position: absolute;
+            top: 50%;
+            right: 12%;
+            /* geser sedikit ke kiri */
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+
+        /* Grid 2x3 */
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .polaroid {
+            background: #fff;
+            padding: 16px;
+            /* lebih besar supaya putih tidak kepotong */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+            width: 180px;
+            /* lebih besar */
+            border-radius: 6px;
+            /* biar lebih halus */
+            box-sizing: border-box;
+            /* pastikan padding dihitung */
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            /* sudut foto halus */
+            margin-bottom: 8px;
+            /* jarak ke teks */
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg);
+        }
+
+        .polaroid p {
+            margin: 8px 0 0;
+            font-weight: bold;
+            color: #000;
+            font-size: 14px;
+        }
+
+        /* Responsif untuk tablet dan mobile */
+        @media (max-width: 1024px) {
+            .polaroid-overlay {
+                position: absolute;
+                top: 10%;
+                /* pindah ke atas hero */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                text-align: center;
+            }
+
+            .polaroid-grid {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 12px;
+                justify-content: flex-start;
+                padding: 10px;
+            }
+
+            .polaroid-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .polaroid {
+                width: 150px;
+                /* lebih kecil */
+                padding: 14px;
+                /* jaga background putih */
+                flex: 0 0 auto;
+            }
+
+            .hero-text {
+                margin: 20px auto;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .hero-text h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-text p {
+                font-size: 0.9rem;
+            }
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-content small {
+            display: block;
+            margin-bottom: 8px;
+            color: #7da0c4;
+            /* warna aksen biru muda */
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .about-content h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #052659;
+            /* warna biru tua */
+            line-height: 1.3;
+        }
+
+        .about-content h2 span {
+            color: #7da0c4;
+            /* highlight Love Bali */
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            max-height: 95px;
+            /* batasi tinggi teks */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            /* potong max 4 baris */
+            -webkit-box-orient: vertical;
+        }
+
+        .about-content a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: 2px solid #7da0c4;
+            /* warna aksen */
+            border-radius: 25px;
+            text-decoration: none;
+            color: #052659;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .about-content a:hover {
+            background: #7da0c4;
+            color: #fff;
+        }
+
+        /* Responsif Tablet dan Mobile */
+        @media (max-width: 991px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-content h2 {
+                font-size: 24px;
+            }
+
+            .about-content p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-section {
+                padding: 20px;
+            }
+
+            .about-content h2 {
+                font-size: 20px;
+            }
+
+            .about-content p {
+                font-size: 14px;
+            }
+        }
+
+        /* header {
+            background: #052659;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #c1e8ff;
+        } */
+
+        .parallax {
+            background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .parallax::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(2, 16, 36, 0.75);
+        }
+
+        .section-title {
+            text-align: center;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #f2f2f2;
+        }
+
+        .section-title p {
+            color: #cfe2f3;
+        }
+
+        /* === Statistik Cards === */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-stats {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            width: 280px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-stats:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            background: #5483b3;
+            color: white;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .card-stats h3 {
+            font-size: 2rem;
+            color: #fff;
+            margin: 15px 0 5px;
+        }
+
+        .card-stats p {
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .growth {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4caf50;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        /* ===== SECTION DENGAN GRADIENT BERGERAK ===== */
+        .gradient-section {
+            background: linear-gradient(270deg, #c1e8ff, #7da0c4, #5483b3, #052659);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            padding: 60px 0;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #021024;
+            font-weight: 700;
+        }
+
+        /* ===== CARD STYLE ===== */
+        .card {
+            position: relative;
+            border: none;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 320px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover img {
+            opacity: 0.85;
+        }
+
+        .card-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg,
+                    rgba(2, 16, 36, 0.95) 0%,
+                    rgba(5, 38, 89, 0.8) 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .card-body h5 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .pagination .page-link {
+            color: #021024;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #052659;
+            border-color: #052659;
+            color: white;
+        }
+
+        /* ==== MODAL ==== */
+        .modal-content {
+            border-radius: 20px;
+            background-color: #052659;
+            /* warna latar belakang modal jadi gelap */
+            border: 2px solid #7da0c4;
+            color: white;
+            /* semua teks dalam modal jadi putih */
+        }
+
+        .btn-book {
+            background-color: #052659;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .btn-book:hover {
+            background-color: #5483b3;
+        }
+
+        /* ==== Perbaikan ukuran gambar di modal ==== */
+        #detailModal .carousel-inner img {
+            width: 90% !important;
+            /* sedikit diperkecil dari lebar penuh */
+            max-width: 400px !important;
+            /* batasi ukuran maksimum */
+            height: 220px !important;
+            /* tetap kecil dan proporsional */
+            object-fit: cover !important;
+            border-radius: 10px;
+            margin: 0 auto;
+            /* agar gambar tetap di tengah */
+            display: block;
+        }
+
+        #detailModal .modal-body {
+            background: rgba(5, 38, 89, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+        }
+
+
+
+
+        /* ==== Teks di dalam modal ==== */
+        .modal-body p,
+        .modal-body strong,
+        .modal-body span,
+        .modal-body ul,
+        .modal-body li,
+        .modal-title {
+            color: white;
+            /* pastikan semua teks di modal berwarna putih */
+        }
+
+        /* ===== RESPONSIVE CARD GRID ===== */
+        @media (min-width: 992px) {
+            .card-col {
+                flex: 0 0 33.3333%;
+                max-width: 33.3333%;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .card-col {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .card-col {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        /* ========== DASAR & WARNA ========== */
+        .event-section {
+            background: linear-gradient(270deg, #c1e8ff, #7da0c4, #5483b3, #052659);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            padding: 60px 0;
+        }
+
+        .event-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .event-section p.subtitle {
+            text-align: center;
+            color: #C1E8FF;
+            margin-bottom: 45px;
+        }
+
+        /* ========== GRID ========== */
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== CARD BESAR ========== */
+        .event-large-card {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 420px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .event-large-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .event-large-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .event-large-content {
+            padding: 20px 25px;
+            background: rgba(2, 16, 36, 0.4);
+            border-radius: 0 0 20px 20px;
+            margin-top: 10px;
+        }
+
+        .event-large-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: #C1E8FF;
+        }
+
+        .event-large-content p {
+            font-size: 1rem;
+            color: #E0E0E0;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .event-location {
+            font-size: 0.95rem;
+            color: #C1E8FF;
+            margin-bottom: 10px;
+        }
+
+        .event-btn {
+            background: #5483B3;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .event-btn:hover {
+            background: #7DA0C4;
+        }
+
+        /* ========== CARD KECIL ========== */
+        .event-small-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .event-small-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .event-small-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .event-small-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 180px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .event-small-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .event-small-card:hover img {
+            filter: brightness(60%);
+            transform: scale(1.03);
+        }
+
+        .event-small-desc {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .event-small-desc h4 {
+            color: #C1E8FF;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+
+        .event-small-desc p {
+            color: #E0E0E0;
+            font-size: 0.9rem;
+            margin: 3px 0;
+        }
+
+        /* ========== MODAL ========== */
+        .event-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 16, 36, 0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .event-modal-content {
+            background: #052659;
+            color: #C1E8FF;
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-modal-content button {
+            background: #5483B3;
+            border: none;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .event-modal-content button:hover {
+            background: #7DA0C4;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: #C1E8FF;
+            cursor: pointer;
+        }
+
+        /* RESPONSIF */
+        @media (max-width: 600px) {
+            .event-large-card {
+                height: 320px;
+            }
+
+            .event-large-content {
+                padding: 15px 20px;
+            }
+
+            .event-large-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .event-large-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        .gallery-container {
+            background: linear-gradient(270deg, #c1e8ff, #7da0c4, #5483b3, #052659);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            padding: 60px 0;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
+            /* <--- perkecil sedikit semua card gambar */
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            /* <--- efek hover tetap sedikit membesar */
+        }
+
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Modal Styling */
+        .modal-dialog {
+            max-width: 90%;
+        }
+
+        .modal-content {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .modal-body {
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #7DA0C4;
+            box-shadow: 0 0 25px rgba(84, 131, 179, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        /* Tombol Navigasi Modern */
+        .modal-navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 25px;
+            pointer-events: none;
+        }
+
+        .nav-btn {
+            pointer-events: auto;
+            background: linear-gradient(145deg, #052659, #5483B3);
+            border: 1px solid #7DA0C4;
+            color: #C1E8FF;
+            font-size: 1.8rem;
+            padding: 12px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(84, 131, 179, 0.6);
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(145deg, #5483B3, #7DA0C4);
+            box-shadow: 0 0 25px rgba(193, 232, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Tombol Close (X) */
+        .close-btn {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            background: linear-gradient(145deg, #5483B3, #7DA0C4);
+            color: #021024;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(193, 232, 255, 0.7);
+        }
+
+        .close-btn:hover {
+            background: #C1E8FF;
+            color: #021024;
+            transform: rotate(90deg);
+            box-shadow: 0 0 25px rgba(193, 232, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .nav-btn {
+                font-size: 1.5rem;
+                padding: 10px 12px;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .testimonial-section {
+            background: linear-gradient(270deg, #c1e8ff, #7da0c4, #5483b3, #052659);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .testimonial-section h2 {
+            font-weight: 700;
+            color: #021024;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .testimonial-card:hover {
+            background: linear-gradient(135deg, #052659, #5483B3, #7DA0C4);
+            color: white;
+            transform: translateY(-8px);
+            border-color: #C1E8FF;
+            box-shadow: 0 0 20px rgba(193, 232, 255, 0.8);
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #052659;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card:hover img {
+            border-color: #C1E8FF;
+            box-shadow: 0 0 10px rgba(193, 232, 255, 0.8);
+        }
+
+        .testimonial-card h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .stars {
+            color: gold;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* ===== RESPONSIVE KHUSUS TABLET (768px - 991px) ===== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .testimonial-section .row {
+        justify-content: center; /* posisi tengah */
+    }
+
+    .testimonial-section .col-md-6 {
+        flex: 0 0 45%; /* dua kolom di baris pertama */
+        max-width: 45%;
+    }
+
+    /* Card terakhir tampil di tengah dan diberi jarak */
+    .testimonial-section .col-md-6:last-child {
+        flex: 0 0 60%;
+        max-width: 60%;
+        margin: 40px auto 0; /* Jarak atas ditambah 40px */
+    }
+
+    .testimonial-card {
+        margin-bottom: 0; /* hilangkan jarak default agar lebih rapat dan seragam */
+    }
+}
+
+
+        /* ===== FAQ MODERN STYLE (PARALLAX + SOLID HOVER) ===== */
+        .faq-modern-section {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            color: #fff;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .faq-modern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 16, 36, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 0;
+        }
+
+        .faq-modern-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+        }
+
+        /* ===== Bagian kiri ===== */
+        .faq-modern-info {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .faq-modern-info h2 {
+            font-size: 2.2rem;
+            color: #C1E8FF;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .faq-modern-info h2 span {
+            color: #7DA0C4;
+        }
+
+        .faq-modern-info p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #E8F3FF;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-modern-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-modern-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 15px;
+            padding: 20px 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover: warna solid dari palet Skijan */
+        .faq-modern-item:hover {
+            background-color: #052659;
+            border-color: #7DA0C4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(193, 232, 255, 0.2);
+        }
+
+        .faq-modern-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #C1E8FF;
+        }
+
+        .faq-modern-question i {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: #C1E8FF;
+        }
+
+        .faq-modern-item.active .faq-modern-question i {
+            transform: rotate(180deg);
+            color: #E8F3FF;
+        }
+
+        .faq-modern-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.4s ease;
+            color: #E8F3FF;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-modern-item.active .faq-modern-answer {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* ===== Responsif ===== */
+        @media (max-width: 992px) {
+            .faq-modern-section {
+                padding: 80px 15px;
+            }
+
+            .faq-modern-info {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .faq-modern-info {
+                margin-bottom: 20px;
+            }
+
+            .faq-modern-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .faq-modern-info p {
+                font-size: 0.95rem;
+            }
+
+            .faq-modern-question {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ===== SECTION BASE ===== */
+        .contact-modern-section {
+            position: relative;
+            background-color: #052659;
+            padding: 100px 20px;
+            color: #E8F3FF;
+            font-family: "Poppins", sans-serif;
+            overflow: hidden;
+        }
+
+        /* ===== PARTICLE FIX (Z-INDEX) ===== */
+        .contact-modern-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            /* biar tidak ganggu klik */
+            overflow: hidden;
+        }
+
+        .contact-modern-particles span {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            background: rgba(193, 232, 255, 0.5);
+            opacity: 0;
+            animation: float 25s linear infinite;
+        }
+
+        /* Partikel variasi: muncul bergantian & acak */
+        .contact-modern-particles span:nth-child(1) {
+            width: 35px;
+            height: 35px;
+            left: 5%;
+            top: 70%;
+            animation-delay: 0s;
+            animation-duration: 22s;
+        }
+
+        .contact-modern-particles span:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            top: 40%;
+            animation-delay: 3s;
+            animation-duration: 25s;
+        }
+
+        .contact-modern-particles span:nth-child(3) {
+            width: 55px;
+            height: 55px;
+            left: 18%;
+            top: 80%;
+            animation-delay: 8s;
+            animation-duration: 28s;
+            background: rgba(125, 160, 196, 0.6);
+        }
+
+        .contact-modern-particles span:nth-child(4) {
+            width: 25px;
+            height: 25px;
+            left: 25%;
+            top: 50%;
+            animation-delay: 6s;
+            animation-duration: 26s;
+        }
+
+        .contact-modern-particles span:nth-child(5) {
+            width: 40px;
+            height: 40px;
+            left: 30%;
+            top: 90%;
+            animation-delay: 2s;
+            animation-duration: 24s;
+        }
+
+        .contact-modern-particles span:nth-child(6) {
+            width: 30px;
+            height: 30px;
+            left: 38%;
+            top: 60%;
+            animation-delay: 9s;
+            animation-duration: 20s;
+            background: rgba(125, 160, 196, 0.55);
+        }
+
+        .contact-modern-particles span:nth-child(7) {
+            width: 45px;
+            height: 45px;
+            left: 45%;
+            top: 30%;
+            animation-delay: 12s;
+            animation-duration: 27s;
+        }
+
+        .contact-modern-particles span:nth-child(8) {
+            width: 15px;
+            height: 15px;
+            left: 55%;
+            top: 70%;
+            animation-delay: 5s;
+            animation-duration: 21s;
+        }
+
+        .contact-modern-particles span:nth-child(9) {
+            width: 28px;
+            height: 28px;
+            left: 60%;
+            top: 85%;
+            animation-delay: 10s;
+            animation-duration: 25s;
+        }
+
+        .contact-modern-particles span:nth-child(10) {
+            width: 22px;
+            height: 22px;
+            left: 67%;
+            top: 40%;
+            animation-delay: 7s;
+            animation-duration: 29s;
+        }
+
+        .contact-modern-particles span:nth-child(11) {
+            width: 60px;
+            height: 60px;
+            left: 72%;
+            top: 75%;
+            animation-delay: 4s;
+            animation-duration: 30s;
+            background: rgba(193, 232, 255, 0.55);
+        }
+
+        .contact-modern-particles span:nth-child(12) {
+            width: 20px;
+            height: 20px;
+            left: 78%;
+            top: 60%;
+            animation-delay: 13s;
+            animation-duration: 23s;
+        }
+
+        .contact-modern-particles span:nth-child(13) {
+            width: 50px;
+            height: 50px;
+            left: 82%;
+            top: 80%;
+            animation-delay: 9s;
+            animation-duration: 28s;
+        }
+
+        .contact-modern-particles span:nth-child(14) {
+            width: 30px;
+            height: 30px;
+            left: 88%;
+            top: 45%;
+            animation-delay: 15s;
+            animation-duration: 24s;
+        }
+
+        .contact-modern-particles span:nth-child(15) {
+            width: 18px;
+            height: 18px;
+            left: 92%;
+            top: 70%;
+            animation-delay: 6s;
+            animation-duration: 22s;
+        }
+
+        .contact-modern-particles span:nth-child(16) {
+            width: 25px;
+            height: 25px;
+            left: 20%;
+            top: 30%;
+            animation-delay: 14s;
+            animation-duration: 27s;
+        }
+
+        .contact-modern-particles span:nth-child(17) {
+            width: 35px;
+            height: 35px;
+            left: 40%;
+            top: 10%;
+            animation-delay: 8s;
+            animation-duration: 23s;
+        }
+
+        .contact-modern-particles span:nth-child(18) {
+            width: 55px;
+            height: 55px;
+            left: 65%;
+            top: 20%;
+            animation-delay: 5s;
+            animation-duration: 28s;
+            background: rgba(125, 160, 196, 0.5);
+        }
+
+        .contact-modern-particles span:nth-child(19) {
+            width: 28px;
+            height: 28px;
+            left: 50%;
+            top: 90%;
+            animation-delay: 11s;
+            animation-duration: 26s;
+        }
+
+        .contact-modern-particles span:nth-child(20) {
+            width: 18px;
+            height: 18px;
+            left: 80%;
+            top: 10%;
+            animation-delay: 17s;
+            animation-duration: 25s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-30vh) scale(1.1);
+                opacity: 0.7;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-60vh) scale(0.9);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CONTENT LAYER ===== */
+        .contact-modern-overlay {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-modern-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-modern-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .contact-modern-map,
+        .contact-modern-form {
+            flex: 1 1 48%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .contact-modern-map {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            display: flex;
+        }
+
+        .contact-modern-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-modern-form {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-modern-form h2 {
+            color: #C1E8FF;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-modern-form p {
+            color: #E8F3FF;
+            margin-bottom: 25px;
+        }
+
+        .contact-modern-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .contact-modern-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #C1E8FF;
+        }
+
+        .contact-modern-group input,
+        .contact-modern-group textarea {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #E8F3FF;
+        }
+
+        .contact-modern-btn {
+            background-color: #7DA0C4;
+            color: #021024;
+            font-weight: 600;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-modern-btn:hover {
+            background-color: #5483B3;
+            color: #E8F3FF;
+            box-shadow: 0 4px 10px rgba(125, 160, 196, 0.4);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        /* ==== FIX MAP MOBILE (AGAR TIDAK PERSEGI PANJANG) ==== */
+        @media (max-width: 576px) {
+            .contact-modern-map iframe {
+                aspect-ratio: unset !important;
+                height: 380px !important;
+                /* ubah sesuai selera, 350–400px ideal */
+            }
+
+            /* opsional: atur padding section agar lebih pas */
+            .contact-modern-section {
+                padding: 70px 15px;
+            }
+        }
+
+
+        @media (max-width: 992px) {
+            .contact-modern-row {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .contact-modern-map iframe {
+                aspect-ratio: 16/9;
+                height: auto;
+            }
+        }
+        
+        /* ===== RESPONSIVE KHUSUS TABLET (768px - 991px) ===== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .contact-modern-container {
+        max-width: 92%;
+    }
+
+    .contact-modern-row {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 30px;
+    }
+
+    .contact-modern-map,
+    .contact-modern-form {
+        flex: 1 1 50%;
+    }
+
+    /* Pastikan map tinggi sama dengan form */
+    .contact-modern-map {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .contact-modern-map iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 500px; /* tambahkan tinggi minimum */
+        border: none;
+        border-radius: 12px;
+    }
+
+    .contact-modern-form {
+        padding: 25px 20px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contact-modern-form h2 {
+        font-size: 1.8rem;
+    }
+
+    .contact-modern-form p {
+        font-size: 1rem;
+    }
+}
+
+
+        .footer-pariwisata {
+            background-color: #052659;
+            color: #C1E8FF;
+            padding: 60px 0 30px;
+        }
+
+        /* ======== PERBAIKAN RESPONSIF GARIS JUDUL ======== */
+
+        /* Default (desktop tetap kiri) */
+        .footer-pariwisata h5 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            text-align: start;
+        }
+
+        .footer-pariwisata h5::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #C1E8FF;
+            border-radius: 2px;
+        }
+
+        /* Saat tampilan tablet & mobile — garis pindah ke tengah */
+        @media (max-width: 768px) {
+            .footer-pariwisata h5 {
+                text-align: center;
+            }
+
+            .footer-pariwisata h5::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+
+
+        .footer-pariwisata a {
+            color: #C1E8FF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-pariwisata a:hover {
+            color: #7DA0C4;
+        }
+
+        .footer-pariwisata .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid #C1E8FF;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 18px;
+            color: #C1E8FF;
+            transition: all 0.3s ease;
+        }
+
+        .footer-pariwisata .social-icons a:hover {
+            background-color: #C1E8FF;
+            color: #052659;
+            transform: scale(1.1);
+        }
+
+        .footer-pariwisata .footer-bottom {
+            border-top: 1px solid #7DA0C4;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#">
+                <img src="https://dummyimage.com/40x40/000/fff&text=L" alt="Logo" width="40" class="me-2" />
+                Travel
+            </a>
+
+            <!-- Tombol kanan (Booking + Search) selalu terlihat -->
+            <div class="d-flex align-items-center order-lg-2">
+                <button class="btn-booking me-2">Booking</button>
+                <button id="searchToggle" class="btn-search">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="navbar-toggler order-lg-3" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Destinasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Event</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+        <div class="container">
+            <input type="text" placeholder="Cari destinasi, event, atau lainnya..." />
+        </div>
+    </div>
+
+    <section id="hero">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active hero-slide" style="
+              background-image: url('https://picsum.photos/id/1018/1920/1080');
+            ">
+                    <div class="container h-100 d-flex flex-column justify-content-center">
+                        <div class="hero-text text-white">
+                            <h1 class="fw-bold mb-3">Jelajahi Keindahan Indonesia</h1>
+                            <p class="mb-4">
+                                Pantai, gunung, budaya, dan kuliner menanti untuk dijelajahi
+                            </p>
+                            <a href="#" class="btn btn-primary btn-lg">Mulai Perjalanan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item hero-slide" style="
+              background-image: url('https://picsum.photos/id/1015/1920/1080');
+            ">
+                    <div class="container h-100 d-flex flex-column justify-content-center">
+                        <div class="hero-text text-white">
+                            <h1 class="fw-bold mb-3">Wisata Alam yang Menakjubkan</h1>
+                            <p class="mb-4">
+                                Gunung, hutan, danau, dan pengalaman seru lainnya
+                            </p>
+                            <a href="#" class="btn btn-light btn-lg">Lihat Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item hero-slide" style="
+              background-image: url('https://picsum.photos/id/1036/1920/1080');
+            ">
+                    <div class="container h-100 d-flex flex-column justify-content-center">
+                        <div class="hero-text text-white">
+                            <h1 class="fw-bold mb-3">Festival & Budaya Nusantara</h1>
+                            <p class="mb-4">
+                                Meriahkan perjalanan Anda dengan event khas Indonesia
+                            </p>
+                            <a href="#" class="btn btn-warning btn-lg">Ikuti Event</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasi Carousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!-- Overlay Polaroid -->
+        <div class="polaroid-overlay">
+            <div class="polaroid-grid">
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1003/300/200" alt="Pantai" />
+                    <p>Pantai</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1015/300/200" alt="Gunung" />
+                    <p>Gunung</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1025/300/200" alt="Budaya" />
+                    <p>Budaya</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1036/300/200" alt="Kuliner" />
+                    <p>Kuliner</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1043/300/200" alt="Sejarah" />
+                    <p>Sejarah</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://picsum.photos/id/1056/300/200" alt="Petualangan" />
+                    <p>Petualangan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-img">
+            <!-- Foto dummy dari Unsplash -->
+            <img src="ai_repair_20251014092959110.jpg"3 alt="About Bali" />
+        </div>
+        <div class="about-content">
+            <small>Om Swastiastu</small>
+            <h2>
+                <span>Love Bali invites you</span> to join in supporting the tourism
+                industry, with a focus on protecting the culture and natural
+                environment of Bali.
+            </h2>
+            <p>
+                As a form of support that aims to protect the customs, traditions,
+                arts and culture, and local wisdom of the Balinese people. Bali will
+                impose levy for the international tourist. Efforts and innovations
+                will continue to be made for maintenance the culture and the natural
+                environment in Bali. There will also continue to be an improvement in
+                the quality of services...
+            </p>
+            <a href="about.html">More About Love Bali</a>
+        </div>
+    </section>
+
+    <section class="parallax">
+        <div class="section-title">
+            <h2>Statistik Pariwisata</h2>
+            <p>
+                Data terbaru yang menunjukkan perkembangan pariwisata di berbagai
+                daerah Nusantara
+            </p>
+        </div>
+
+        <div class="stats-container">
+            <div class="card-stats">
+                <div class="growth">+18%</div>
+                <div class="icon">👥</div>
+                <h3><span class="counter" data-target="25000">1</span></h3>
+                <p>Wisatawan</p>
+            </div>
+
+            <div class="card-stats">
+                <div class="growth">+12%</div>
+                <div class="icon">🏝️</div>
+                <h3><span class="counter" data-target="320">1</span></h3>
+                <p>Destinasi</p>
+            </div>
+
+            <div class="card-stats">
+                <div class="growth">+6%</div>
+                <div class="icon">🧭</div>
+                <h3><span class="counter" data-target="85">1</span></h3>
+                <p>Pemandu Wisata</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION DESTINASI -->
+    <section class="gradient-section">
+        <div class="container">
+            <h2 class="section-title" id="destinasi">Destinasi Wisata</h2>
+            <div id="cardContainer" class="row g-4 justify-content-center"></div>
+
+            <nav>
+                <ul id="pagination" class="pagination"></ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- MODAL DETAIL -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modalTitle" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Carousel Foto -->
+                    <div id="modalCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                        <div class="carousel-inner" id="carouselInner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+
+                    <p id="modalDesc"></p>
+                    <p><strong>Harga:</strong> <span id="modalPrice"></span></p>
+                    <ul id="modalBenefit"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-book">Booking Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="event-section">
+        <h2>Events</h2>
+        <p class="subtitle">Temukan berbagai acara menarik di seluruh Indonesia.</p>
+
+        <div class="event-grid">
+
+            <!-- CARD BESAR -->
+            <div>
+                <div class="event-large-card">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=900&q=60"
+                        alt="Ubud Food Festival">
+                </div>
+                <div class="event-large-content">
+                    <h3>Ubud Food Festival 2025</h3>
+                    <p class="event-location">📍 Bali, Indonesia</p>
+                    <p>Festival kuliner tahunan yang menampilkan warisan kuliner Nusantara dan demo masak dari chef
+                        ternama.</p>
+                    <button class="event-btn" onclick="openEventModal()">Read More</button>
+                </div>
+            </div>
+
+            <!-- CARD KECIL -->
+            <div class="event-small-cards">
+                <div>
+                    <div class="event-small-card">
+                        <img src="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="event-small-desc">
+                        <h4>Festival Tari Tradisional</h4>
+                        <p>📍 Yogyakarta, Indonesia</p>
+                        <p>Perayaan budaya dengan pertunjukan tari dari berbagai daerah Nusantara.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="event-small-card">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="event-small-desc">
+                        <h4>Pesta Musik Bali</h4>
+                        <p>📍 Denpasar, Indonesia</p>
+                        <p>Konser musik tahunan yang menghadirkan musisi lokal dan internasional.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="event-small-card">
+                        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="event-small-desc">
+                        <h4>Festival Seni Rakyat</h4>
+                        <p>📍 Surakarta, Indonesia</p>
+                        <p>Menampilkan seni lukis, patung, dan karya budaya dari seniman lokal.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="event-small-card">
+                        <img src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="event-small-desc">
+                        <h4>Pameran Budaya Nusantara</h4>
+                        <p>📍 Jakarta, Indonesia</p>
+                        <p>Pameran budaya yang memperkenalkan kekayaan tradisi Indonesia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="event-modal" id="eventModal">
+        <div class="event-modal-content">
+            <span class="close-modal" onclick="closeEventModal()">&times;</span>
+            <h3>Ubud Food Festival 2025</h3>
+            <p>📍 Bali, Indonesia</p>
+            <p>
+                Acara kuliner terbesar di Bali kembali hadir! Menampilkan berbagai makanan khas Nusantara,
+                demo masak oleh chef terkenal, dan pertunjukan budaya yang memukau.
+                Nikmati pengalaman cita rasa dan budaya Indonesia dalam satu festival penuh warna.
+            </p>
+            <button onclick="closeEventModal()">Tutup</button>
+        </div>
+    </div>
+
+    <div class="gallery-container">
+        <h2 class="text-center mb-4">Galeri Wisata Nusantara</h2>
+        <div class="row g-3">
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1018/600/400" alt="Pantai"></div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1025/600/400" alt="Gunung"></div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1039/600/400" alt="Danau"></div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1040/600/400" alt="Air Terjun"></div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1041/600/400" alt="Sawah"></div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="gallery-item"><img src="https://picsum.photos/id/1050/600/400" alt="Perbukitan"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">&times;</button>
+                    <div class="modal-navigation">
+                        <button type="button" class="nav-btn prev">&lsaquo;</button>
+                        <button type="button" class="nav-btn next">&rsaquo;</button>
+                    </div>
+                    <img id="modalImage" src="" alt="Preview">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2>Testimoni Pengunjung</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <img src="https://i.pravatar.cc/100?img=1" alt="Foto Siti">
+                        <h5>Siti, Bandung</h5>
+                        <div class="stars">★★★★★</div>
+                        <p>Liburan ke Pantai Indah benar-benar menenangkan, anak-anak sangat senang bermain pasir.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <img src="https://i.pravatar.cc/100?img=2" alt="Foto Rian">
+                        <h5>Rian, Surabaya</h5>
+                        <div class="stars">★★★★★</div>
+                        <p>Pendakian Gunung Asri adalah pengalaman terbaik saya tahun ini, pemandangannya luar biasa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <img src="https://i.pravatar.cc/100?img=3" alt="Foto Dewi">
+                        <h5>Dewi, Yogyakarta</h5>
+                        <div class="stars">★★★★★</div>
+                        <p>Saya sangat merekomendasikan wisata ini! Pelayanan ramah dan suasananya nyaman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ MODERN SECTION (PARALLAX + SOLID HOVER) ===== -->
+    <section class="faq-modern-section">
+        <div class="faq-modern-overlay"></div>
+        <div class="container faq-modern-container">
+            <div class="row align-items-start">
+                <!-- Bagian kiri -->
+                <div class="col-lg-5 faq-modern-info">
+                    <h2>Tentang <span>Skijan Travel</span></h2>
+                    <p>
+                        Skijan Travel menghadirkan pengalaman berwisata yang memadukan budaya, alam, dan keindahan laut
+                        Indonesia.
+                        Kami percaya perjalanan bukan sekadar liburan, melainkan cara untuk menemukan makna baru dalam
+                        setiap langkah.
+                    </p>
+                    <p>
+                        Jelajahi destinasi unggulan dengan layanan profesional, serta nikmati keramahan lokal di setiap
+                        perjalanan Anda.
+                    </p>
+                </div>
+
+                <!-- Bagian kanan -->
+                <div class="col-lg-7 faq-modern-list">
+                    <div class="faq-modern-item">
+                        <div class="faq-modern-question">
+                            <span>Bagaimana cara memesan paket wisata?</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="faq-modern-answer">
+                            Anda dapat memesan melalui tombol “Booking Sekarang” di halaman destinasi atau menghubungi
+                            kami melalui halaman kontak.
+                        </div>
+                    </div>
+
+                    <div class="faq-modern-item">
+                        <div class="faq-modern-question">
+                            <span>Apakah ada panduan lokal di setiap destinasi?</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="faq-modern-answer">
+                            Ya, setiap destinasi wisata memiliki pemandu profesional yang siap membantu Anda menjelajahi
+                            keindahan dan budaya setempat.
+                        </div>
+                    </div>
+
+                    <div class="faq-modern-item">
+                        <div class="faq-modern-question">
+                            <span>Apakah layanan tersedia untuk wisata internasional?</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="faq-modern-answer">
+                            Kami juga menyediakan layanan wisata internasional dengan kerja sama agen
+                            perjalanan terpercaya di berbagai negara.
+                        </div>
+                    </div>
+
+                    <div class="faq-modern-item">
+                        <div class="faq-modern-question">
+                            <span>Bagaimana kebijakan pembatalan pemesanan?</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="faq-modern-answer">
+                            Pembatalan dapat dilakukan maksimal 3 hari sebelum jadwal keberangkatan
+                            dengan potongan biaya administrasi sebesar 10%.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT MODERN SECTION (FINAL PARTICLE FIX) ===== -->
+    <section class="contact-modern-section">
+        <!-- LAYER PARTIKEL -->
+        <div class="contact-modern-particles">
+            <!-- 20 Partikel -->
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="contact-modern-overlay">
+            <div class="contact-modern-container">
+                <div class="contact-modern-row">
+                    <!-- MAP -->
+                    <div class="contact-modern-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.1892435174417!2d115.16210787502147!3d-8.671458391382625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2473edb6c4a75%3A0x2e01012cb2c02b69!2sBali!5e0!3m2!1sid!2sid!4v1696522335581!5m2!1sid!2sid"
+                            allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- FORM -->
+                    <div class="contact-modern-form">
+                        <h2>Hubungi Kami</h2>
+                        <p>Ingin tahu lebih banyak tentang layanan wisata kami? Kirim pesan melalui formulir di bawah
+                            ini.</p>
+
+                        <form>
+                            <div class="contact-modern-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" placeholder="Masukkan nama Anda" required />
+                            </div>
+
+                            <div class="contact-modern-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="Masukkan email Anda" required />
+                            </div>
+
+                            <div class="contact-modern-group">
+                                <label>Pesan</label>
+                                <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="contact-modern-btn">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Pariwisata -->
+    <footer class="footer-pariwisata text-center text-md-start">
+        <div class="container">
+            <div class="row">
+                <!-- Tentang Kami -->
+                <div class="col-md-4 mb-4">
+                    <h5>Tentang Kami</h5>
+                    <p>
+                        Website pariwisata yang menyajikan keindahan alam, budaya, dan destinasi terbaik di seluruh
+                        Indonesia.
+                    </p>
+                </div>
+
+                <!-- Menu -->
+                <div class="col-md-4 mb-4">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Destinasi</a></li>
+                        <li><a href="#">Paket Wisata</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <!-- Ikuti Kami -->
+                <div class="col-md-4 mb-4">
+                    <h5>Ikuti Kami</h5>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom mt-4">
+                <p>&copy; 2025 Pariwisata Indonesia. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const searchToggle = document.getElementById("searchToggle");
+        const searchBar = document.getElementById("searchBar");
+
+        searchToggle.addEventListener("click", () => {
+            searchBar.classList.toggle("show");
+        });
+
+        // === Efek Count-Up JS versi ES5 ===
+        var counters = document.querySelectorAll(".counter");
+        var speed = 100;
+
+        function animateCounter(counter) {
+            var target = parseInt(counter.getAttribute("data-target"));
+            var count = parseInt(counter.innerText);
+
+            var increment = Math.ceil(target / speed);
+
+            function updateCount() {
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = count;
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target.toLocaleString();
+                }
+            }
+
+            updateCount();
+        }
+
+        // Observer untuk memulai animasi saat terlihat di layar
+        var observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.6 }
+        );
+
+        for (var i = 0; i < counters.length; i++) {
+            observer.observe(counters[i]);
+        }
+
+        var destinations = [
+            {
+                name: "Desa Wisata Undisan",
+                images: [
+                    "https://source.unsplash.com/800x500/?village,bali",
+                    "https://source.unsplash.com/800x500/?culture",
+                    "https://source.unsplash.com/800x500/?ricefield",
+                ],
+                desc: "Desa tradisional dengan budaya khas Bali.",
+                price: "Rp 50.000",
+                benefit: ["Homestay", "Kuliner Lokal", "Pemandu Wisata"],
+            },
+            {
+                name: "Pantai Pandawa",
+                images: [
+                    "https://source.unsplash.com/800x500/?beach,bali",
+                    "https://source.unsplash.com/800x500/?ocean",
+                    "https://source.unsplash.com/800x500/?cliff,sea",
+                ],
+                desc: "Pantai indah tersembunyi di balik tebing batu kapur.",
+                price: "Rp 25.000",
+                benefit: ["Parkir Gratis", "Spot Foto", "Toilet Umum"],
+            },
+            {
+                name: "Water Blow",
+                images: [
+                    "https://source.unsplash.com/800x500/?sea,splash",
+                    "https://source.unsplash.com/800x500/?rock,water",
+                    "https://source.unsplash.com/800x500/?coast",
+                ],
+                desc: "Fenomena semburan air laut yang unik di Bali.",
+                price: "Rp 30.000",
+                benefit: ["Akses Mudah", "Toilet", "Area Duduk"],
+            },
+
+        ];
+        function renderDestinations() {
+            // kode untuk menampilkan card destinasi
+        }
+        renderDestinations();
+        var currentPage = 1;
+        var cardsPerPage = 6;
+        var totalPages = Math.ceil(destinations.length / cardsPerPage);
+
+        function renderCards() {
+            var container = document.getElementById("cardContainer");
+            container.innerHTML = "";
+            var start = (currentPage - 1) * cardsPerPage;
+            var end = start + cardsPerPage;
+            var sliced = destinations.slice(start, end);
+
+            for (var i = 0; i < sliced.length; i++) {
+                var d = sliced[i];
+                var col = document.createElement("div");
+                col.className = "card-col d-flex justify-content-center";
+
+                col.innerHTML =
+                    '<div class="card w-100" onclick="showDetail(' +
+                    (start + i) +
+                    ')">' +
+                    '<img src="' +
+                    d.images[0] +
+                    '" alt="' +
+                    d.name +
+                    '">' +
+                    '<div class="card-body text-center">' +
+                    "<h5>" +
+                    d.name +
+                    "</h5>" +
+                    '<p class="small mb-0">' +
+                    d.desc +
+                    "</p>" +
+                    "</div>" +
+                    "</div>";
+                container.appendChild(col);
+            }
+            renderPagination();
+        }
+
+        function renderPagination() {
+            var pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+            for (var i = 1; i <= totalPages; i++) {
+                var li = document.createElement("li");
+                li.className = "page-item" + (i === currentPage ? " active" : "");
+                var a = document.createElement("a");
+                a.className = "page-link";
+                a.innerText = i;
+                a.href = "javascript:void(0)";
+                a.onclick = (function (page) {
+                    return function () {
+                        changePage(page);
+                    };
+                })(i);
+                li.appendChild(a);
+                pagination.appendChild(li);
+            }
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderCards();
+            document
+                .getElementById("destinasi")
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function showDetail(index) {
+            var d = destinations[index];
+            document.getElementById("modalTitle").innerText = d.name;
+            document.getElementById("modalDesc").innerText = d.desc;
+            document.getElementById("modalPrice").innerText = d.price;
+
+            var carouselInner = document.getElementById("carouselInner");
+            carouselInner.innerHTML = "";
+            for (var i = 0; i < d.images.length; i++) {
+                var div = document.createElement("div");
+                div.className = "carousel-item" + (i === 0 ? " active" : "");
+                div.innerHTML =
+                    '<img src="' + d.images[i] + '" class="d-block w-100">';
+                carouselInner.appendChild(div);
+            }
+
+            var list = document.getElementById("modalBenefit");
+            list.innerHTML = "";
+            for (var j = 0; j < d.benefit.length; j++) {
+                var li = document.createElement("li");
+                li.innerText = d.benefit[j];
+                list.appendChild(li);
+            }
+
+            new bootstrap.Modal(document.getElementById("detailModal")).show();
+        }
+
+        renderCards();
+
+        // ========== JS ES5 ==========
+        function openEventModal() {
+            document.getElementById('eventModal').style.display = 'flex';
+        }
+
+        function closeEventModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        window.onclick = function (e) {
+            var modal = document.getElementById('eventModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+        // Gunakan JS ES5 agar kompatibel
+        var images = document.querySelectorAll('.gallery-item img');
+        var modal = new bootstrap.Modal(document.getElementById('galleryModal'));
+        var modalImg = document.getElementById('modalImage');
+        var currentIndex = 0;
+
+        for (var i = 0; i < images.length; i++) {
+            (function (index) {
+                images[index].addEventListener('click', function () {
+                    currentIndex = index;
+                    modalImg.src = images[index].src;
+                    modal.show();
+                });
+            })(i);
+        }
+
+        document.querySelector('.next').addEventListener('click', function () {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+        });
+
+        document.querySelector('.prev').addEventListener('click', function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (!document.getElementById('galleryModal').classList.contains('show')) return;
+            if (e.keyCode === 37) document.querySelector('.prev').click(); // ←
+            if (e.keyCode === 39) document.querySelector('.next').click(); // →
+            if (e.keyCode === 27) modal.hide(); // Esc
+        });
+
+        // === FAQ MODERN JS (ES5) ===
+        var faqItems = document.getElementsByClassName('faq-modern-item');
+
+        for (var i = 0; i < faqItems.length; i++) {
+            faqItems[i].addEventListener('click', function () {
+                for (var j = 0; j < faqItems.length; j++) {
+                    var icon = faqItems[j].getElementsByTagName('i')[0];
+                    if (faqItems[j] !== this) {
+                        faqItems[j].classList.remove('active');
+                        icon.className = 'bi bi-chevron-down';
+                    }
+                }
+
+                this.classList.toggle('active');
+
+                var currentIcon = this.getElementsByTagName('i')[0];
+                if (this.classList.contains('active')) {
+                    currentIcon.className = 'bi bi-chevron-up';
+                } else {
+                    currentIcon.className = 'bi bi-chevron-down';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

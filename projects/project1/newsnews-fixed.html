@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Navigasi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        /* Navbar custom */
+        .navbar-custom {
+            background-color: #0056b3;
+            /* biru */
+            border-bottom: 4px solid red;
+            /* garis merah bawah */
+        }
+
+        /* Hover link utama */
+        .navbar-custom .nav-link:hover {
+            color: red !important;
+        }
+
+        .navbar .nav-link.active,
+        .navbar .dropdown-item.active {
+            font-weight: bold;
+            color: #0d6efd !important;
+            /* biru Bootstrap */
+            background-color: #e9ecef;
+            /* abu-abu muda untuk dropdown */
+            border-radius: 4px;
+        }
+
+
+        /* Dropdown menu background */
+        .dropdown-menu {
+            background-color: #0056b3;
+            /* biru */
+        }
+
+        /* Dropdown item */
+        .dropdown-menu .dropdown-item {
+            color: #fff;
+            /* putih */
+        }
+
+        /* Hover dropdown item */
+        .dropdown-menu .dropdown-item:hover {
+            background-color: red;
+            color: #fff;
+        }
+
+        .parallax-banner {
+            background-image: url('hero.jpg');
+            /* ganti dengan gambar banner */
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            min-height: 80vh;
+            /* tinggi banner */
+        }
+
+        .parallax-banner h1,
+        .parallax-banner p {
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .kategori-link {
+            color: #007bff;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .kategori-link:hover {
+            color: red;
+            text-decoration: underline;
+        }
+
+        .headline-kecil img {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .headline-kecil .berita-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            /* beri jarak antar berita */
+        }
+
+        .headline-kecil img {
+            width: 150px;
+            /* lebih besar */
+            height: 100px;
+            /* lebih besar */
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 15px;
+            /* jarak gambar ke teks */
+        }
+
+        .headline-kecil .kategori-link {
+            color: #007bff;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.1rem;
+            /* sedikit lebih besar */
+        }
+
+        .headline-kecil .kategori-link:hover {
+            color: red;
+            text-decoration: underline;
+        }
+
+        .headline-kecil p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .headline-besar img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: cyan;
+            font-weight: bold;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-areas:
+                "big small1 small2"
+                "big small3 small4"
+                "wide wide tall";
+            grid-gap: 15px;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-auto-rows: 200px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay-text {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .gallery-item button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .gallery-item button:hover {
+            background: cyan;
+            color: #111;
+        }
+
+        .big {
+            grid-area: big;
+        }
+
+        .small1 {
+            grid-area: small1;
+        }
+
+        .small2 {
+            grid-area: small2;
+        }
+
+        .small3 {
+            grid-area: small3;
+        }
+
+        .small4 {
+            grid-area: small4;
+        }
+
+        .wide {
+            grid-area: wide;
+            height: 250px;
+        }
+
+        .tall {
+            grid-area: tall;
+            height: 250px;
+        }
+
+        .modal-footer-text {
+            padding: 15px;
+            background: #f8f9fa;
+            color: #111;
+        }
+
+        .news-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #00538f;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .news-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+            /* agar otomatis turun di layar kecil */
+        }
+
+        .news-card {
+            position: relative;
+            width: 160px;
+            height: 380px;
+            border-radius: 80px;
+            overflow: hidden;
+            transition: all 0.4s ease-in-out;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .news-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 25px;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .news-card:hover {
+            width: 300px;
+            border-radius: 25px;
+        }
+
+        .news-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .news-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 992px) {
+
+            /* Tablet */
+            .news-card {
+                width: 140px;
+                height: 320px;
+                border-radius: 70px;
+            }
+
+            .news-card:hover {
+                width: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Mobile */
+            .news-section {
+                flex-direction: column;
+                /* kartu ditumpuk */
+            }
+
+            .news-card {
+                width: 90%;
+                height: 350px;
+                border-radius: 20px;
+            }
+
+            .news-card:hover {
+                width: 95%;
+                /* tetap melebar sedikit di mobile */
+            }
+        }
+
+        .news-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 30px 0;
+        }
+
+        .politics-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            padding: 40px 0;
+            overflow-x: auto;
+            /* biar bisa scroll saat mobile */
+            scrollbar-width: none;
+            /* hilangkan scrollbar di firefox */
+        }
+
+        .politics-section::-webkit-scrollbar {
+            display: none;
+            /* hilangkan scrollbar di chrome */
+        }
+
+        .politics-card {
+            position: relative;
+            width: 250px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            flex-shrink: 0;
+            margin-left: -60px;
+            /* overlap effect */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .politics-card:first-child {
+            margin-left: 0;
+            /* biar yang pertama tidak ketarik */
+        }
+
+        .politics-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .politics-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .politics-card .overlay h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .politics-card .overlay p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .politics-card:hover {
+            transform: scale(1.15);
+            z-index: 5;
+            /* maju ke depan */
+        }
+
+        .politics-card:hover img {
+            transform: scale(1.2);
+        }
+
+        .politics-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .politics-section {
+                justify-content: flex-start;
+                /* biar mulai dari kiri */
+                padding-left: 20px;
+            }
+
+            .politics-card {
+                width: 220px;
+                height: 330px;
+                margin-left: -40px;
+                /* tetap overlap di mobile */
+            }
+        }
+
+        .news-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #00ffcc;
+            margin: 30px 0;
+            letter-spacing: 2px;
+        }
+
+        .sports-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            padding: 40px 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .sports-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sports-card {
+            position: relative;
+            width: 250px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            flex-shrink: 0;
+            margin-left: -60px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .sports-card:first-child {
+            margin-left: 0;
+        }
+
+        .sports-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .sports-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .sports-card .overlay h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+
+        .sports-card .overlay p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .sports-card:hover {
+            transform: scale(1.15);
+            z-index: 5;
+        }
+
+        .sports-card:hover img {
+            transform: scale(1.2);
+        }
+
+        .sports-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .sports-section {
+                justify-content: flex-start;
+                padding-left: 20px;
+            }
+
+            .sports-card {
+                width: 220px;
+                height: 330px;
+                margin-left: -40px;
+            }
+        }
+
+        .news-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #d4af37;
+            /* warna emas */
+            margin: 30px 0;
+            letter-spacing: 2px;
+        }
+
+        .economy-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            padding: 40px 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .economy-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .economy-card {
+            position: relative;
+            width: 250px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            flex-shrink: 0;
+            margin-left: -60px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #fff;
+        }
+
+        .economy-card:first-child {
+            margin-left: 0;
+        }
+
+        .economy-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .economy-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .economy-card .overlay h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffd700;
+            /* kuning keemasan */
+        }
+
+        .economy-card .overlay p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .economy-card:hover {
+            transform: scale(1.15);
+            z-index: 5;
+        }
+
+        .economy-card:hover img {
+            transform: scale(1.2);
+        }
+
+        .economy-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .economy-section {
+                justify-content: flex-start;
+                padding-left: 20px;
+            }
+
+            .economy-card {
+                width: 220px;
+                height: 330px;
+                margin-left: -40px;
+            }
+        }
+
+        .news-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #8e44ad;
+            /* ungu cerah */
+            margin: 30px 0;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+        }
+
+        .entertain-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            padding: 40px 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .entertain-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .entertain-card {
+            position: relative;
+            width: 250px;
+            height: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            flex-shrink: 0;
+            margin-left: -60px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #fff;
+        }
+
+        .entertain-card:first-child {
+            margin-left: 0;
+        }
+
+        .entertain-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .entertain-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(155, 89, 182, 0.6);
+            /* ungu transparan */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .entertain-card .overlay h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffe600;
+            /* kuning terang agar kontras */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .entertain-card .overlay p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .entertain-card:hover {
+            transform: scale(1.15) rotate(-1deg);
+            z-index: 5;
+        }
+
+        .entertain-card:hover img {
+            transform: scale(1.25);
+        }
+
+        .entertain-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .entertain-section {
+                justify-content: flex-start;
+                padding-left: 20px;
+            }
+
+            .entertain-card {
+                width: 220px;
+                height: 320px;
+                margin-left: -40px;
+            }
+        }
+
+        .about-section {
+            background-color: #00538f;
+            /* biru */
+            padding: 60px 20px;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            border-bottom: 4px solid red;
+            /* garis merah */
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .highlight-text span {
+            display: block;
+        }
+
+        .highlight-text .blue {
+            color: #00b2ff;
+        }
+
+        .highlight-text .black {
+            color: red;
+            background: #fff;
+            padding: 0 5px;
+            display: inline-block;
+        }
+
+        /* Supaya teks kanan mepet kiri */
+        .custom-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .custom-row .about-text {
+            flex: 1;
+        }
+
+        .custom-row .highlight-text {
+            margin-left: 20px;
+            /* jarak kecil biar mepet */
+            text-align: left;
+        }
+
+        .faq-section {
+            background-color: #f8f9fa;
+            /* abu abu terang */
+            padding: 60px 20px;
+        }
+
+        .faq-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-left: 5px solid red;
+            padding-left: 10px;
+            color: #00538f;
+        }
+
+        .faq-illustration img {
+            max-width: 100%;
+        }
+
+        .contact-section {
+            background-color: #f8f9fa;
+            padding: 60px 20px;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-left: 5px solid red;
+            padding-left: 10px;
+            color: #00538f;
+        }
+
+        /* Placeholder jadi biru */
+        .form-control::placeholder {
+            color: #00538f;
+            /* biru */
+            opacity: 1;
+            /* biar warna jelas */
+            font-weight: 500;
+            /* opsional: agak tebal */
+        }
+
+        /* Styling khusus informasi kontak */
+        .contact-info {
+            font-size: 1.3rem;
+            /* teks lebih besar */
+            line-height: 1.8;
+            /* jarak lebih lega */
+        }
+
+        .contact-info h5 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info h6 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info i {
+            color: #00538f;
+            margin-right: 12px;
+            font-size: 1.4rem;
+            /* ikon lebih besar */
+        }
+
+        .contact-info a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #00538f;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background-color: #00538f;
+            color: #eee;
+            padding: 60px 20px 40px;
+        }
+
+        .footer a {
+            color: #eee;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer h6 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 30px;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .footer .social-icons a {
+            font-size: 1.4rem;
+            margin-right: 15px;
+            color: #eee;
+            transition: 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #ff4747;
+        }
+
+        .footer .partner-logo img {
+            max-width: 120px;
+            /* atur ukuran logo kecil */
+            margin: 0 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer .partner-logo img:hover {
+            opacity: 1;
+        }
+
+        .footer .partners {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="#">
+                <img src="imgsrc.png" alt="Logo" height="30" class="d-inline-block align-text-top">
+            </a>
+
+            <!-- Toggle button (mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#headline-section"
+                            id="nav-beranda">Beranda</a></li>
+
+                    <!-- Dropdown Tentang -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tentangDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Tentang
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="tentangDropdown">
+                            <li><a class="dropdown-item" href="#about" id="nav-about">About</a></li>
+                            <li><a class="dropdown-item" href="#faq" id="nav-faq">FAQ</a></li>
+                            <li><a class="dropdown-item" href="#contact" id="nav-contact">Contact</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#populer-section" id="nav-populer">Berita
+                            Terpopuler</a></li>
+
+                    <!-- Dropdown Kategori -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="kategoriDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Katalog Berita
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="kategoriDropdown">
+                            <li><a class="dropdown-item" href="#politic-section" id="nav-politik">Politik</a></li>
+                            <li><a class="dropdown-item" href="#sport-section" id="nav-sports">Olahraga</a></li>
+                            <li><a class="dropdown-item" href="#eco-section" id="nav-economy">Ekonomi</a></li>
+                            <li><a class="dropdown-item" href="#entertains-section" id="nav-entertain">Hiburan</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#terbaru-section" id="nav-terbaru">Berita Terbaru</a>
+                    </li>
+                </ul>
+
+                <!-- Search form -->
+                <form class="d-flex" role="search" id="searchForm">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Cari berita..."
+                        aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Cari</button>
+                </form>
+                <!-- Tempat untuk pesan error -->
+                <p id="searchMessage" style="color:red; font-weight:bold;"></p>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="parallax-banner d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <!-- Teks kiri -->
+                <div class="col-md-6 text-light">
+                    <h1 class="fw-bold">Selamat Datang di NewsPortal</h1>
+                    <p>Website berita terpercaya dengan informasi terkini seputar politik, olahraga, ekonomi, dan
+                        hiburan.</p>
+                    <a href="#terbaru" class="btn btn-danger">Lihat Berita Terbaru</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="headline-section" class="section">
+        <div class="container my-4">
+            <div class="row">
+
+                <!-- Kolom Kanan: Headline Besar -->
+                <div class="col-md-8 headline-besar">
+                    <h4 class="fw-bold mb-3">HEADLINE UTAMA</h4>
+                    <span class="kategori-link" data-bs-toggle="modal" data-bs-target="#modalLiga">LIGA INDONESIA</span>
+                    <small class="text-muted"> 38 menit lalu</small>
+                    <h5 class="mt-2 fw-bold">Gustavo Almeida Sudah Pulih dari Cedera, Turun di Laga Persija Jakarta vs
+                        Bali
+                        United?</h5>
+                    <img src="hero.jpg" alt="headline">
+                </div>
+                <!-- Kolom Kiri: Headline kecil -->
+                <div class="col-md-4 headline-kecil">
+                    <h5 class="fw-bold mb-3">NEWS</h5>
+
+                    <div class="berita-item">
+                        <img src="hero.jpg">
+                        <div>
+                            <span class="kategori-link" data-bs-toggle="modal"
+                                data-bs-target="#modalNetting">Netting</span>
+                            <p>Hasil Hong Kong Open 2025: Menangi Duel Sengera, Jafar Felisha...</p>
+                        </div>
+                    </div>
+
+                    <div class="berita-item">
+                        <img src="hero.jpg">
+                        <div>
+                            <span class="kategori-link" data-bs-toggle="modal" data-bs-target="#modalGossip">Hot
+                                Gossip</span>
+                            <p>Heboh, Kentaro Sakaguchi Disiukan Selingkuh dengan Mei...</p>
+                        </div>
+                    </div>
+
+                    <div class="berita-item">
+                        <img src="hero.jpg">
+                        <div>
+                            <span class="kategori-link" data-bs-toggle="modal"
+                                data-bs-target="#modalNusantara">Nusantara</span>
+                            <p>Tim SAR Temukan Helikopter Jatuh di Papua, Penumpang...</p>
+                        </div>
+                    </div>
+
+                    <div class="berita-item">
+                        <img src="hero.jpg">
+                        <div>
+                            <span class="kategori-link" data-bs-toggle="modal"
+                                data-bs-target="#modalSepakbola">Sepakbola
+                                Dunia</span>
+                            <p>Hector Souto Bicara Target Timnas Futsal Indonesia...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODALS -->
+    <div class="modal fade" id="modalLiga" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kategori: Liga Indonesia</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/700x400" alt="Liga Indonesia">
+                    <p>Gustavo Almeida sudah kembali dari cedera dan diperkirakan turun di laga Persija Jakarta vs Bali
+                        United.
+                        Kehadirannya diharapkan memberi dampak besar bagi lini depan tim Macan Kemayoran.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalNetting" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kategori: Netting</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/700x400" alt="Netting">
+                    <p>Hasil Hong Kong Open 2025 menampilkan duel seru. Jafar Felisha tampil gemilang menghadapi lawan
+                        tangguh dari Malaysia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalGossip" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kategori: Hot Gossip</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/700x400" alt="Hot Gossip">
+                    <p>Aktor Jepang Kentaro Sakaguchi dikabarkan terseret isu perselingkuhan.
+                        Kabar ini langsung viral di media sosial Jepang.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalNusantara" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kategori: Nusantara</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/700x400" alt="Nusantara">
+                    <p>Tim SAR menemukan lokasi jatuhnya helikopter di Papua. Proses evakuasi penumpang sedang
+                        berlangsung.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalSepakbola" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kategori: Sepakbola Dunia</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://via.placeholder.com/700x400" alt="Sepakbola Dunia">
+                    <p>Hector Souto menegaskan target besar untuk Timnas Futsal Indonesia di turnamen internasional
+                        mendatang.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="populer-section" class="section" style="display: none;">
+
+        <div class="container py-5">
+            <h2 class="section-title">BERITA TERPOPULER</h2>
+            <div class="gallery mb-5">
+                <div class="gallery-item big">
+                    <img src="https://picsum.photos/600/400?random=1" alt="Berita 1">
+                    <div class="overlay-text">Berita Populer 1</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal1">Lihat</button>
+                </div>
+                <div class="gallery-item small1">
+                    <img src="https://picsum.photos/600/400?random=2" alt="Berita 2">
+                    <div class="overlay-text">Berita Populer 2</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal2">Lihat</button>
+                </div>
+                <div class="gallery-item small2">
+                    <img src="https://picsum.photos/600/400?random=3" alt="Berita 3">
+                    <div class="overlay-text">Berita Populer 3</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal3">Lihat</button>
+                </div>
+                <div class="gallery-item small3">
+                    <img src="https://picsum.photos/600/400?random=4" alt="Berita 4">
+                    <div class="overlay-text">Berita Populer 4</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal4">Lihat</button>
+                </div>
+                <div class="gallery-item small4">
+                    <img src="https://picsum.photos/600/400?random=5" alt="Berita 5">
+                    <div class="overlay-text">Berita Populer 5</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal5">Lihat</button>
+                </div>
+                <div class="gallery-item wide">
+                    <img src="https://picsum.photos/800/300?random=6" alt="Berita 6">
+                    <div class="overlay-text">Berita Populer 6</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal6">Lihat</button>
+                </div>
+                <div class="gallery-item tall">
+                    <img src="https://picsum.photos/400/600?random=7" alt="Berita 7">
+                    <div class="overlay-text">Berita Populer 7</div>
+                    <button data-bs-toggle="modal" data-bs-target="#modal7">Lihat</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal1" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title">Berita Populer 1</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://picsum.photos/800/500?random=1" class="img-fluid mb-3" alt="">
+                    <p>Isi berita singkat mengenai berita populer 1.</p>
+                </div>
+                <div class="modal-footer-text">
+                    Penjelasan 1: Ini adalah teks tambahan di luar isi berita, misalnya catatan atau informasi
+                    pendukung.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal2" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title">Berita Populer 2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://picsum.photos/800/500?random=2" class="img-fluid mb-3" alt="">
+                    <p>Isi berita singkat mengenai berita populer 2.</p>
+                </div>
+                <div class="modal-footer-text">
+                    Penjelasan 2: Keterangan tambahan yang bisa menjelaskan konteks dari berita ini.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal lain bisa dibuat sama seperti di atas untuk berita 3 dst... -->
+
+    <section id="terbaru-section" class="section" style="display: none;">
+
+        <h2 class="news-title">BERITA TERBARU</h2>
+
+        <div class="news-section">
+            <div class="news-card">
+                <img src="https://picsum.photos/300/500?random=11" alt="Berita 1">
+                <div class="overlay">Berita Terbaru 1 - Penjelasan singkat berita ini.</div>
+            </div>
+            <div class="news-card">
+                <img src="https://picsum.photos/300/500?random=12" alt="Berita 2">
+                <div class="overlay">Berita Terbaru 2 - Penjelasan singkat berita ini.</div>
+            </div>
+            <div class="news-card">
+                <img src="https://picsum.photos/300/500?random=13" alt="Berita 3">
+                <div class="overlay">Berita Terbaru 3 - Penjelasan singkat berita ini.</div>
+            </div>
+            <div class="news-card">
+                <img src="https://picsum.photos/300/500?random=14" alt="Berita 4">
+                <div class="overlay">Berita Terbaru 4 - Penjelasan singkat berita ini.</div>
+            </div>
+            <div class="news-card">
+                <img src="https://picsum.photos/300/500?random=15" alt="Berita 5">
+                <div class="overlay">Berita Terbaru 5 - Penjelasan singkat berita ini.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="politic-section" class="section" style="display: none;">
+
+        <h2 class="news-title">KATEGORI POLITIK</h2>
+
+        <div class="politics-section">
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=41" alt="Politik 1">
+                <div class="overlay">
+                    <h3>Berita Politik 1</h3>
+                    <p>Penjelasan singkat terkait berita politik pertama.</p>
+                </div>
+            </div>
+
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=42" alt="Politik 2">
+                <div class="overlay">
+                    <h3>Berita Politik 2</h3>
+                    <p>Penjelasan singkat terkait berita politik kedua.</p>
+                </div>
+            </div>
+
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=43" alt="Politik 3">
+                <div class="overlay">
+                    <h3>Berita Politik 3</h3>
+                    <p>Penjelasan singkat terkait berita politik ketiga.</p>
+                </div>
+            </div>
+
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=41" alt="Politik 1">
+                <div class="overlay">
+                    <h3>Berita Politik 1</h3>
+                    <p>Penjelasan singkat terkait berita politik pertama.</p>
+                </div>
+            </div>
+
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=42" alt="Politik 2">
+                <div class="overlay">
+                    <h3>Berita Politik 2</h3>
+                    <p>Penjelasan singkat terkait berita politik kedua.</p>
+                </div>
+            </div>
+
+            <div class="politics-card">
+                <img src="https://picsum.photos/400/600?random=43" alt="Politik 3">
+                <div class="overlay">
+                    <h3>Berita Politik 3</h3>
+                    <p>Penjelasan singkat terkait berita politik ketiga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sport-section" class="section" style="display: none;">
+
+        <h2 class="news-title">KATEGORI OLAHRAGA</h2>
+
+        <div class="sports-section">
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=51" alt="Olahraga 1">
+                <div class="overlay">
+                    <h3>Berita Olahraga 1</h3>
+                    <p>Timnas meraih kemenangan gemilang dalam laga persahabatan internasional.</p>
+                </div>
+            </div>
+
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=52" alt="Olahraga 2">
+                <div class="overlay">
+                    <h3>Berita Olahraga 2</h3>
+                    <p>Atlet nasional berhasil meraih medali emas di ajang kejuaraan dunia.</p>
+                </div>
+            </div>
+
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=53" alt="Olahraga 3">
+                <div class="overlay">
+                    <h3>Berita Olahraga 3</h3>
+                    <p>Klub sepak bola unggulan memastikan tiket ke babak final kompetisi liga.</p>
+                </div>
+            </div>
+
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=51" alt="Olahraga 1">
+                <div class="overlay">
+                    <h3>Berita Olahraga 1</h3>
+                    <p>Timnas meraih kemenangan gemilang dalam laga persahabatan internasional.</p>
+                </div>
+            </div>
+
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=52" alt="Olahraga 2">
+                <div class="overlay">
+                    <h3>Berita Olahraga 2</h3>
+                    <p>Atlet nasional berhasil meraih medali emas di ajang kejuaraan dunia.</p>
+                </div>
+            </div>
+
+            <div class="sports-card">
+                <img src="https://picsum.photos/400/600?random=53" alt="Olahraga 3">
+                <div class="overlay">
+                    <h3>Berita Olahraga 3</h3>
+                    <p>Klub sepak bola unggulan memastikan tiket ke babak final kompetisi liga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eco-section" class="section" style="display: none;">
+        <h2 class="news-title">KATEGORI EKONOMI</h2>
+
+        <div class="economy-section">
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=61" alt="Ekonomi 1">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 1</h3>
+                    <p>Nilai tukar rupiah menguat terhadap dolar Amerika pada perdagangan hari ini.</p>
+                </div>
+            </div>
+
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=62" alt="Ekonomi 2">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 2</h3>
+                    <p>Pemerintah resmi mengumumkan kebijakan fiskal baru untuk mendukung UMKM.</p>
+                </div>
+            </div>
+
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=63" alt="Ekonomi 3">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 3</h3>
+                    <p>Indeks harga saham gabungan ditutup menguat di level tertinggi bulan ini.</p>
+                </div>
+            </div>
+
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=61" alt="Ekonomi 1">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 1</h3>
+                    <p>Nilai tukar rupiah menguat terhadap dolar Amerika pada perdagangan hari ini.</p>
+                </div>
+            </div>
+
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=62" alt="Ekonomi 2">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 2</h3>
+                    <p>Pemerintah resmi mengumumkan kebijakan fiskal baru untuk mendukung UMKM.</p>
+                </div>
+            </div>
+
+            <div class="economy-card">
+                <img src="https://picsum.photos/400/600?random=63" alt="Ekonomi 3">
+                <div class="overlay">
+                    <h3>Berita Ekonomi 3</h3>
+                    <p>Indeks harga saham gabungan ditutup menguat di level tertinggi bulan ini.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="entertains-section" style="display: none;">
+        <h2 class="news-title">KATEGORI HIBURAN</h2>
+
+        <div class="entertain-section">
+            <div class="entertain-card">
+                <img src="https://picsum.photos/400/600?random=71" alt="Hiburan 1">
+                <div class="overlay">
+                    <h3>Berita Hiburan 1</h3>
+                    <p>Konser musik besar-besaran sukses digelar dengan ribuan penonton hadir.</p>
+                </div>
+            </div>
+
+            <div class="entertain-card">
+                <img src="https://picsum.photos/400/600?random=72" alt="Hiburan 2">
+                <div class="overlay">
+                    <h3>Berita Hiburan 2</h3>
+                    <p>Film terbaru berhasil meraih rekor penonton tertinggi tahun ini.</p>
+                </div>
+            </div>
+
+            <div class="entertain-card">
+                <img src="https://picsum.photos/400/600?random=73" alt="Hiburan 3">
+                <div class="overlay">
+                    <h3>Berita Hiburan 3</h3>
+                    <p>Festival budaya menampilkan pertunjukan spektakuler dari berbagai daerah.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <!-- Judul -->
+            <h1 class="about-title">ABOUT US OKEZONE.COM</h1>
+
+            <div class="custom-row">
+                <!-- Konten kiri -->
+                <div class="about-text text-white">
+                    <p>Okezone.com merupakan portal online berita dan hiburan yang berfokus pada pembaca Indonesia baik
+                        yang berada di tanah air maupun yang tinggal di luar negeri.</p>
+                    <p>Okezone.com memiliki beragam konten seperti berita umum, politik, peristiwa, internasional,
+                        ekonomi, lifestyle, selebriti, sports, bola, auto, teknologi, Travel, Food, Haji, dan Muslim.
+                    </p>
+                    <p>Okezone.com resmi diluncurkan (Commercial Launch) sebagai portal berita pada 1 Maret 2007.
+                        Lahirnya Okezone.com menjadi cikal-bakal bisnis online pertama milik PT Media Nusantara Citra
+                        Tbk (MNC), sebuah perusahaan media terintegrasi yang terbesar di Indonesia dan Asia Tenggara.
+                    </p>
+                    <p>PT MNC Tbk juga memiliki dan mengelola bisnis media TV (RCTI, MNCTV, GTV, dan iNewsTV), media
+                        cetak (Koran Seputar Indonesia, Sindo Weekly, Highend, Just For Kids, Highend Teen, Network!).
+                    </p>
+                    <p>Kemudian media radio (MNC Trijaya FM, Global Radio, Radio RDI, V Radio). Selain media massa, PT
+                        MNC Tbk juga memiliki deretan bisnis di berbagai sektor.</p>
+                    <p>Mulai Juni 2019, Okezone menduduki peringkat ke-2 untuk Kategori portal berita terpopuler di
+                        Indonesia (Sumber: Alexa.com). Prestasi ini tercipta karena semakin banyak pengunjung situs yang
+                        mengakses Okezone.com setiap harinya.</p>
+                    <p>Selain itu, jumlah pengguna internet di Indonesia juga terus tumbuh mencapai 150 (data Google)
+                        juta pada 2017, dan diperkirakan akan terus tumbuh secara signifikan dalam beberapa tahun ke
+                        depan.</p>
+                </div>
+
+                <!-- Konten kanan -->
+                <div class="highlight-text">
+                    <span class="blue">TAU</span>
+                    <span class="blue">CEPAT</span>
+                    <span class="black">TANPA</span>
+                    <span class="blue">BATAS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Bagian kiri: FAQ -->
+                <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
+                    <h2 class="faq-title">FAQ - Pertanyaan Seputar Okezone</h2>
+
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Pertanyaan 1 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse1" aria-expanded="true">
+                                    1. Apa itu website berita online?
+                                </button>
+                            </h2>
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Website berita online adalah portal digital yang menyajikan informasi terkini
+                                    seperti politik, ekonomi, olahraga, hiburan, dan lainnya secara cepat dan mudah
+                                    diakses.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pertanyaan 2 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse2">
+                                    2. Apakah berita yang disajikan selalu valid?
+                                </button>
+                            </h2>
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Ya, berita yang disajikan berasal dari sumber resmi dan melalui proses verifikasi
+                                    redaksi sebelum dipublikasikan.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pertanyaan 3 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse3">
+                                    3. Apakah website berita ini gratis?
+                                </button>
+                            </h2>
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sebagian besar konten dapat diakses secara gratis, namun beberapa fitur premium
+                                    mungkin membutuhkan langganan khusus.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pertanyaan 4 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse4">
+                                    4. Bagaimana cara mengakses berita lama?
+                                </button>
+                            </h2>
+                            <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Anda dapat menggunakan fitur pencarian atau kategori arsip untuk menemukan berita
+                                    lama dengan mudah.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pertanyaan 5 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse5">
+                                    5. Apakah berita bisa dibagikan ke media sosial?
+                                </button>
+                            </h2>
+                            <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Tentu saja, setiap artikel dilengkapi tombol share untuk WhatsApp, Facebook,
+                                    Twitter, dan platform sosial media lainnya.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian kanan: Ilustrasi -->
+                <div class="col-lg-5 col-md-12 text-center faq-illustration">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Ilustrasi Berita">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- Judul -->
+                <div class="col-12 mb-4">
+                    <h2 class="contact-title">Hubungi Kami</h2>
+                </div>
+
+                <!-- Form Kontak -->
+                <div class="col-lg-7 col-md-12 mb-4">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Masukkan email Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subjek</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Subjek pesan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="message" rows="5"
+                                placeholder="Tulis pesan Anda di sini"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+
+                <!-- Informasi Kontak -->
+                <div class="col-lg-5 col-md-12 contact-info">
+                    <h5>Kontak Redaksi</h5>
+                    <p><i class="bi bi-geo-alt-fill"></i> Jl. Jurnalis No. 123, Jakarta, Indonesia</p>
+                    <p><i class="bi bi-envelope-fill"></i> redaksi@webberita.com</p>
+                    <p><i class="bi bi-telephone-fill"></i> +62 812-3456-7890</p>
+                    <hr>
+                    <h6>Ikuti Kami:</h6>
+                    <p>
+                        <a href="#" class="d-block mb-1"><i class="bi bi-facebook"></i> Facebook</a>
+                        <a href="#" class="d-block mb-1"><i class="bi bi-twitter"></i> Twitter</a>
+                        <a href="#" class="d-block"><i class="bi bi-instagram"></i> Instagram</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                <!-- Logo & Deskripsi -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-logo">OKEZONE</div>
+                    <p>Portal berita online terpercaya menyajikan informasi terkini seputar politik, ekonomi, olahraga,
+                        hiburan, dan lifestyle untuk pembaca Indonesia di mana pun berada.</p>
+                </div>
+
+                <!-- Navigasi Cepat -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h6 class="text-uppercase">Navigasi</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Redaksi</a></li>
+                        <li><a href="#">Pedoman Media Siber</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informasi Kontak -->
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <h6 class="text-uppercase">Kontak</h6>
+                    <p><i class="bi bi-geo-alt-fill"></i> Jl. Jurnalis No. 123, Jakarta</p>
+                    <p><i class="bi bi-envelope-fill"></i> redaksi@berita.com</p>
+                    <p><i class="bi bi-telephone-fill"></i> +62 812-3456-7890</p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Gambar partner/sponsor seperti di bawah footer -->
+            <div class="partners">
+                <span class="partner-logo"><img src="imgsrc.png" alt="Logo Partner 1"></span>
+                <span class="partner-logo"><img src="mncportal.png" alt="Logo Partner 2"></span>
+                <span class="partner-logo"><img src="gtv.webp" alt="Logo Partner 3"></span>
+                <!-- bisa tambah sesuai kebutuhan -->
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                © 2025 BERITA.COM | Hak Cipta Dilindungi Undang-Undang
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // --- fungsi utama: show/hide section, scroll, dan update menu aktif ---
+        function showSection(id) {
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+            }
+
+            var target = document.getElementById(id);
+            if (!target) {
+                console.warn('showSection: target not found ->', id);
+                return;
+            }
+            target.style.display = "block";
+            try { target.scrollIntoView({ behavior: "smooth" }); } catch (err) { /* ignore */ }
+
+            // reset semua nav-link & dropdown-item
+            var navLinks = document.querySelectorAll('.navbar .nav-link, .navbar .dropdown-item');
+            navLinks.forEach(function (link) { link.classList.remove('active'); });
+
+            // aktifkan nav sesuai id (mencari link yang href="#id")
+            var activeLink = document.querySelector('.navbar a[href="#' + id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+        }
+
+        // --- handler pencarian ---
+        var searchForm = document.getElementById("searchForm");
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var query = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+                var message = document.getElementById("searchMessage");
+                var sections = document.getElementsByClassName("section");
+                var found = false;
+
+                var scrollSections = ["about", "faq", "contact"];
+
+                if (query.length === 0) {
+                    if (message) message.innerHTML = "Masukkan kata kunci pencarian.";
+                    return;
+                }
+
+                // 1) cari di section yang bisa show/hide
+                for (var i = 0; i < sections.length; i++) {
+                    var content = (sections[i].innerText || "").toLowerCase();
+                    if (content.indexOf(query) !== -1) {
+                        showSection(sections[i].id);
+                        if (message) message.innerHTML = "";
+                        found = true;
+                        break;
+                    }
+                }
+
+                // 2) kalau belum, cek section statis (about/faq/contact)
+                if (!found) {
+                    for (var j = 0; j < scrollSections.length; j++) {
+                        var sec = document.getElementById(scrollSections[j]);
+                        if (sec && (sec.innerText || "").toLowerCase().indexOf(query) !== -1) {
+                            try { sec.scrollIntoView({ behavior: "smooth" }); } catch (err) { }
+                            // update active menu jika ada
+                            var navLinks = document.querySelectorAll('.navbar .nav-link, .navbar .dropdown-item');
+                            navLinks.forEach(function (link) { link.classList.remove('active'); });
+                            var activeLink = document.querySelector('.navbar a[href="#' + scrollSections[j] + '"]');
+                            if (activeLink) activeLink.classList.add('active');
+
+                            if (message) message.innerHTML = "";
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                // 3) fallback: tidak ditemukan
+                if (!found) {
+                    if (message) message.innerHTML = "Tidak sesuai: " + query;
+                    showSection("headline-section");
+                }
+            });
+        }
+
+        // --- pasang event listener menu (aman: cek dulu exist) ---
+        var onClickShow = function (btnId, sectionId) {
+            var el = document.getElementById(btnId);
+            if (el) el.addEventListener('click', function (e) { e.preventDefault(); showSection(sectionId); });
+        };
+
+        onClickShow('nav-about', 'about');
+        onClickShow('nav-faq', 'faq');
+        onClickShow('nav-contact', 'contact');
+        onClickShow('nav-beranda', 'headline-section');
+        onClickShow('nav-populer', 'populer-section');
+        onClickShow('nav-terbaru', 'terbaru-section');
+        onClickShow('nav-politik', 'politic-section');
+        onClickShow('nav-sports', 'sport-section');
+        onClickShow('nav-economy', 'eco-section');
+        onClickShow('nav-entertain', 'entertains-section');
+
+        // --- inisialisasi: tampilkan headline di awal ---
+        showSection('headline-section');
+
+    }); // DOMContentLoaded
+</script>
+
+</html>
