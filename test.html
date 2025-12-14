@@ -1,270 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Section Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio - Skills</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-<style>
-/* ===== BASE ===== */
-body {
-  background: linear-gradient(135deg, #0a0a0a, #1a002e);
-  color: #fff;
-  font-family: Arial, sans-serif;
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-/* ===== ABOUT IMAGE ===== */
-.about-img {
-  position: relative;
-  width: 380px;
-  margin: auto;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-.about-img::before {
-  content: "";
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  width: 100%;
-  height: 100%;
-  border: 2px solid #a855f7;
-  border-radius: 20px;
-  z-index: 1;
-  opacity: 0.85;
-}
+    body {
+      background: radial-gradient(circle at top, #1a0b2e, #0b0417);
+      color: #ffffff;
+    }
 
-/* ===== FLIP CARD ===== */
-.about-card {
-  width: 100%;
-  height: 480px;
-  perspective: 1000px;
-  position: relative;
-  z-index: 2;
-}
+    /* ===== SKILLS SECTION ===== */
+    .skills-section {
+      padding: 100px 20px;
+      min-height: 100vh;
+    }
 
-.about-card-inner {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.8s ease;
-  border-radius: 20px;
-}
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
 
-.about-card:hover .about-card-inner {
-  transform: rotateY(180deg);
-}
+    .section-title {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #a855f7, #d946ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.about-front,
-.about-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: 20px;
-  overflow: hidden;
-}
+    .section-subtitle {
+      text-align: center;
+      color: #c4b5fd;
+      margin-bottom: 60px;
+      font-size: 16px;
+    }
 
-/* FRONT */
-.about-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
 
-/* BACK */
-.about-back {
-  background: rgba(20, 20, 20, 0.95);
-  transform: rotateY(180deg);
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    .skill-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(168,85,247,0.08), rgba(0,0,0,0));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 18px;
+      padding: 40px 25px;
+      text-align: center;
+      transition: all 0.35s ease;
+      overflow: hidden;
+    }
 
-.about-back h4 {
-  color: #c084fc;
-  margin-bottom: 18px;
-}
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(168,85,247,0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
 
-.about-back p {
-  margin: 6px 0;
-  font-size: 0.95rem;
-}
+    .skill-card i {
+      font-size: 48px;
+      color: #c084fc;
+      margin-bottom: 18px;
+      z-index: 1;
+      position: relative;
+    }
 
-.about-back span {
-  color: #a855f7;
-  font-weight: 600;
-}
+    .skill-card h4 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      z-index: 1;
+      position: relative;
+    }
 
-/* ===== ABOUT TEXT ===== */
-.about-text h2 {
-  font-size: 2.3rem;
-  margin-bottom: 22px;
-  position: relative;
-  display: inline-block;
-  transition: 0.3s ease;
-}
+    .skill-card span {
+      font-size: 14px;
+      color: #ddd6fe;
+      z-index: 1;
+      position: relative;
+    }
 
-.about-text h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 55px;
-  height: 3px;
-  background: #a855f7;
-  transition: width 0.3s ease;
-}
+    .skill-card:hover {
+      transform: translateY(-12px);
+      border-color: #d946ef;
+      box-shadow: 0 25px 60px rgba(168,85,247,0.35);
+    }
 
-.about-text h2:hover {
-  color: #c084fc;
-}
+    .skill-card:hover::before {
+      opacity: 1;
+    }
 
-.about-text h2:hover::after {
-  width: 100%;
-}
-
-/* ===== PARAGRAPH HOVER ===== */
-.about-desc {
-  line-height: 1.9;
-  margin-bottom: 16px;
-  color: #e5e5e5;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.about-desc:hover {
-  transform: translateX(6px);
-  color: #ffffff;
-}
-
-/* ===== PURPLE TEXT + UNDERLINE HOVER ===== */
-.about-desc span {
-  color: #c084fc;
-  font-weight: 600;
-  position: relative;
-  cursor: pointer;
-}
-
-.about-desc span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: #a855f7;
-  transition: width 0.3s ease;
-}
-
-.about-desc span:hover::after {
-  width: 100%;
-}
-
-/* ===== TAGS ===== */
-.about-tags {
-  margin-top: 28px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.about-tags span {
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.about-tags span:hover {
-  background: #a855f7;
-  color: #fff;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(168,85,247,0.4);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .about-text {
-    text-align: center;
-    margin-top: 30px;
-  }
-
-  .about-text h2::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .about-tags {
-    justify-content: center;
-  }
-}
-</style>
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<section class="container py-5">
-  <div class="row align-items-center">
+  <!-- SKILLS -->
+  <section id="skills" class="skills-section">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <p class="section-subtitle">Technologies & expertise I work with</p>
 
-    <!-- FOTO FLIP -->
-    <div class="col-md-5 text-center">
-      <div class="about-img">
-        <div class="about-card">
-          <div class="about-card-inner">
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-html5"></i>
+          <h4>HTML</h4>
+          <span>Advanced</span>
+        </div>
 
-            <div class="about-front">
-              <img src="pict/FOTO ADEKZA.png" alt="Profile">
-            </div>
+        <div class="skill-card">
+          <i class="fab fa-css3-alt"></i>
+          <h4>CSS</h4>
+          <span>Advanced</span>
+        </div>
 
-            <div class="about-back">
-              <h4>Personal Info</h4>
-              <p><span>Name:</span> Adekza</p>
-              <p><span>Age:</span> 16</p>
-              <p><span>Location:</span> Indonesia</p>
-              <p><span>Email:</span> example@email.com</p>
-              <p><span>Phone:</span> +62 xxxx xxxx</p>
-            </div>
+        <div class="skill-card">
+          <i class="fab fa-js"></i>
+          <h4>JavaScript</h4>
+          <span>Intermediate</span>
+        </div>
 
-          </div>
+        <div class="skill-card">
+          <i class="fab fa-bootstrap"></i>
+          <h4>Bootstrap</h4>
+          <span>Intermediate</span>
+        </div>
+
+        <div class="skill-card">
+          <i class="fas fa-network-wired"></i>
+          <h4>Networking</h4>
+          <span>Basic</span>
+        </div>
+
+        <div class="skill-card">
+          <i class="fas fa-tools"></i>
+          <h4>IT Support</h4>
+          <span>Basic</span>
         </div>
       </div>
     </div>
-
-    <!-- TEXT -->
-    <div class="col-md-7 about-text">
-      <h2>About Me</h2>
-
-      <p class="about-desc">
-        I am a <span>Junior IT Support</span> student majoring in
-        <span>Computer and Network Engineering</span> with a strong interest
-        in networking and technology.
-      </p>
-
-      <p class="about-desc">
-        Experienced in <span>network installation</span>,
-        <span>basic troubleshooting</span>, and using
-        <span>Cisco Packet Tracer</span> and <span>Mikrotik</span>.
-      </p>
-
-      <p class="about-desc">
-        I also enjoy <span>front-end web development</span> and building
-        <span>responsive</span> and <span>user-friendly</span> interfaces.
-      </p>
-
-      <div class="about-tags">
-        <span>Networking</span>
-        <span>IT Support</span>
-        <span>Web Development</span>
-        <span>Troubleshooting</span>
-      </div>
-    </div>
-
-  </div>
-</section>
+  </section>
 
 </body>
 </html>
