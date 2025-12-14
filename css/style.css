@@ -381,14 +381,6 @@ header {
 
 .skills-title::after {
   content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: #a855f7;
-  margin: 12px auto 0;
-  border-radius: 10px;
-
-  content: "";
   position: absolute;
   left: 0;
   bottom: -10px;
@@ -443,6 +435,34 @@ header {
   background: rgba(168, 85, 247, 0.15);
   box-shadow: 0 20px 45px rgba(168, 85, 247, 0.35);
   border-color: #a855f7;
+}
+
+/* PROJECTS TITLE  */
+.project-title {
+  font-size: 2.3rem;
+  margin-bottom: 22px;
+  position: relative;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.project-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 55px;
+  height: 3px;
+  background: #a855f7;
+  transition: width 0.3s ease;
+}
+
+.project-title:hover {
+  color: #c084fc;
+}
+
+.project-title:hover::after {
+  width: 100%;
 }
 
 /* PROJECTS CARD */
