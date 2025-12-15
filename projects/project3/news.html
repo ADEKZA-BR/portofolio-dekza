@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Section</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .news-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+    .news-card img {
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .news-card img:hover {
+      transform: scale(1.05);
+    }
+    .news-date {
+      font-size: 0.9rem;
+      color: #6495ED;
+      font-weight: 500;
+    }
+    .card-title {
+      font-weight: bold;
+      color: #333;
+    }
+    .card-text {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <div class="row g-4">
+
+    <div class="col-md-4 col-sm-6">
+      <div class="card news-card">
+        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="News Image">
+        <div class="card-body">
+          <p class="news-date">1 September 2025, 10:00 WIB</p>
+          <h5 class="card-title">MPLS 2025</h5>
+          <p class="card-text">
+            Menapak Masa Depan Gemilang! Hari MPLS dilaksanakan dengan semangat dan antusiasme siswa baru kelas X.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <div class="card news-card">
+        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="News Image">
+        <div class="card-body">
+          <p class="news-date">30 Agustus 2025, 08:00 WIB</p>
+          <h5 class="card-title">Peresmian Gedung Baru</h5>
+          <p class="card-text">
+            Gedung baru sekolah resmi dibuka untuk mendukung kegiatan belajar yang lebih nyaman dan modern.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <div class="card news-card">
+        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="News Image">
+        <div class="card-body">
+          <p class="news-date">28 Agustus 2025, 09:30 WIB</p>
+          <h5 class="card-title">Prestasi Olimpiade Sains</h5>
+          <p class="card-text">
+            Siswa sekolah berhasil meraih medali emas dalam Olimpiade Sains tingkat nasional tahun ini.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

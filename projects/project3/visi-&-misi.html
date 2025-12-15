@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nama Sekolah</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Navbar transparan */
+        .navbar {
+            transition: background-color 0.4s, padding 0.4s;
+            padding: 20px 0;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            /* ukuran logo */
+            margin-right: 10px;
+        }
+
+        /* Hover dropdown */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            /* biar nempel */
+        }
+
+        /* Hero Section dengan parallax */
+        .hero {
+            height: 100vh;
+            background: url('https://picsum.photos/1920/1080?blur=2') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            /* parallax effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-custom {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        #visi-misi {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #visi-misi h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .visi p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .misi ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .misi ul li {
+            margin: 8px 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            #visi-misi {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+
+            #visi-misi h2 {
+                font-size: 20px;
+            }
+
+            .visi p,
+            .misi ul li {
+                font-size: 14px;
+            }
+        }
+
+        /* Text info */
+        .photo-overlay h5 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .photo-overlay p {
+            margin: 3px 0;
+            font-size: 14px;
+        }
+
+        .social-media {
+            background-color: #212529;
+            /* warna background seperti contoh */
+        }
+
+        .social-icon img {
+            width: 80px;
+            height: 80px;
+            transition: 0.3s ease-in-out;
+            filter: grayscale(100%);
+            /* default abu-abu */
+        }
+
+        /* Hover efek sesuai warna masing-masing */
+        .social-icon.whatsapp img:hover {
+            filter: grayscale(0%);
+            background-color: #25D366;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .social-icon.instagram img:hover {
+            filter: grayscale(0%);
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border-radius: 20%;
+            padding: 10px;
+        }
+
+        .social-icon.youtube img:hover {
+            filter: grayscale(0%);
+            background-color: #FF0000;
+            border-radius: 15%;
+            padding: 10px;
+        }
+
+        .social-icon.twitter img:hover {
+            filter: grayscale(0%);
+            background-color: #1DA1F2;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .social-icon.facebook img:hover {
+            filter: grayscale(0%);
+            background-color: #0165fd;
+            border-radius: 10%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- Tambahkan logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo Sekolah">
+                Nama Sekolah
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="homepage-skanesa.html">Beranda</a>
+                    </li>
+                    <!-- Dropdown Tentang Kami -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Tentang Kami
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil-skanesa.html">Profil Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi-&-misi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="struktur.html">Struktur Organisasi</a></li>
+                        </ul>
+                    </li>
+                    <!-- Dropdown Informasi -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="informasiDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Informasi
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#fasilitas">Fasilitas</a></li>
+                            <li><a class="dropdown-item" href="#jurusan">Jurusan</a></li>
+                            <li><a class="dropdown-item" href="#ekstrakurikuler">Ekstrakurikuler</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ppdb">PPDB</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news">News</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>VISI & MISI <span class="text-warning">SEKOLAH</span></h1>
+            <p>
+                <a href="homepage-skanesa.html">BERANDA</a> >>
+                <a href="visi-&-misi.html" class="active">VISI & MISI</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Section VISI & MISI -->
+    <section id="visi-misi">
+        <div class="visi">
+            <h2>VISI</h2>
+            <p>
+                Menjadikan sekolah yang unggul dengan lulusan yang Berprestasi,
+                Disiplin, Berkarakter baik, Inovatif, Kreatif, dan siap berkarir.
+            </p>
+        </div>
+
+        <div class="misi">
+            <h2>MISI</h2>
+            <ul>
+                <li>Mewujudkan Lingkungan Pendidikan yang Islami dan berakhlaq mulia.</li>
+                <li>Mewujudkan Budaya Disiplin Sekolah.</li>
+                <li>Menumbuhkan semangat keunggulan dan kompetitif yang kreatif dan inovatif bagi seluruh warga sekolah.
+                </li>
+                <li>Mewujudkan Kegiatan pendidikan yang bermutu dan inovatif dengan berbasis proyek (Project Base
+                    Learning) dan/atau berbasis permasalahan terkini (Problem Base Learning).</li>
+                <li>Mewujudkan manajemen yang transparan, akuntabel, efektif dan partisipatif.</li>
+                <li>Mempersiapkan Lulusan Yang Siap Berkarier.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER SECTION ===== -->
+    <footer id="footer" class="bg-dark text-white pt-5">
+
+        <!-- Sosial Media -->
+        <div class="container text-center mb-4">
+            <div class="row justify-content-center">
+                <!-- WhatsApp -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://wa.me/6281234567890" target="_blank" class="social-icon whatsapp">
+                        <img src="whatsapp.jpeg" alt="WhatsApp" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Instagram -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://instagram.com/" target="_blank" class="social-icon instagram">
+                        <img src="instagram.jpeg" alt="Instagram" class="img-fluid">
+                    </a>
+                </div>
+                <!-- YouTube -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://youtube.com/" target="_blank" class="social-icon youtube">
+                        <img src="youtube.jpeg" alt="YouTube" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Twitter -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://twitter.com/" target="_blank" class="social-icon twitter">
+                        <img src="twitter.jpeg" alt="Twitter" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Facebook -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://facebook.com/" target="_blank" class="social-icon facebook">
+                        <img src="facebook.jpeg" alt="Facebook" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="container">
+            <div class="row text-start">
+                <!-- Quick Links -->
+                <div class="col-6 col-md-4 mb-4">
+                    <h5 class="fw-bold">QUICK LINKS</h5>
+                    <ul class="list-unstyled">
+                        <li>☆ Profil Sekolah</li>
+                        <li>☆ Program Akademik</li>
+                        <li>☆ Ekstrakurikuler</li>
+                        <li>☆ Prestasi Siswa</li>
+                        <li>☆ Hubungi Kami</li>
+                    </ul>
+                </div>
+
+                <!-- Tools -->
+                <div class="col-6 col-md-4 mb-4">
+                    <h5 class="fw-bold">TOOLS</h5>
+                    <ul class="list-unstyled">
+                        <li>Beranda</li>
+                        <li>Profil Singkat</li>
+                        <li>Fasilitas</li>
+                        <li>Jurusan</li>
+                        <li>PPDB</li>
+                        <li>Gallery</li>
+                        <li>Berita</li>
+                    </ul>
+                </div>
+
+                <!-- Motto -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="p-3 border rounded">
+                        <h5 class="fw-bold">Nama Sekolah</h5>
+                        <p class="mb-0">
+                            “Terbang Tinggi Bersama Pengetahuan dan Sportivitas.
+                            Nama Sekolah membentuk generasi unggul, disiplin,
+                            dan penuh semangat dalam meraih prestasi akademik maupun non-akademik.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Garis Pemisah -->
+        <hr class="border-secondary my-3">
+
+        <!-- Copyright -->
+        <div class="text-center pb-3">
+            <small>© 2025 Nama Sekolah. All Rights Reserved.</small>
+        </div>
+
+    </footer>
+
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar berubah saat scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nama Sekolah</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Navbar transparan */
+        .navbar {
+            transition: background-color 0.4s, padding 0.4s;
+            padding: 20px 0;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            /* ukuran logo */
+            margin-right: 10px;
+        }
+
+        /* Hover dropdown */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            /* biar nempel */
+        }
+
+        /* Hero Section dengan parallax */
+        .hero {
+            height: 100vh;
+            background: url('https://picsum.photos/1920/1080?blur=2') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            /* parallax effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-custom {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background: #ffc107;
+            color: #000;
+        }
+
+        /* ===== MENU ===== */
+        .data {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+            background: #5c3521;
+            flex-wrap: wrap;
+        }
+
+        .data button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .data button.aktif {
+            color: #f6b900;
+            border-bottom: 2px solid #f6b900;
+        }
+
+        /* ===== SEARCH BAR ===== */
+        .search-bar {
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .konten {
+            display: none;
+            padding: 2rem;
+        }
+
+        .konten.aktif {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== CARD ===== */
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            width: 220px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card .info {
+            padding: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #f6b900;
+            color: white;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f6f6f6;
+            text-align: left;
+        }
+
+        .modal-toggle {
+            display: none;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .modal-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal .close {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-toggle:checked+.modal {
+            display: flex;
+        }
+
+
+        .tombol-detail {
+            background: #1db5e4;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* ===== FORM ALUMNI ===== */
+        .daftar-alumni {
+            margin: 10px 0;
+            background: #f6b900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        #formAlumni {
+            display: none;
+            margin-top: 15px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #formAlumni input {
+            padding: 8px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+        }
+
+        #formAlumni button {
+            background: #1db5e4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Ganti nama agar aman */
+        .alumni-modal-toggle {
+            display: none;
+        }
+
+        .alumni-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .alumni-modal-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .alumni-modal .alumni-close {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* aturan show/hide */
+        .alumni-modal-toggle:checked+.alumni-modal {
+            display: flex;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 5px;
+        }
+
+        .pagination button {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background: #003366;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .konten {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .konten.aktif {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Text info */
+        .photo-overlay h5 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .photo-overlay p {
+            margin: 3px 0;
+            font-size: 14px;
+        }
+
+        .social-media {
+            background-color: #212529;
+            /* warna background seperti contoh */
+        }
+
+        .social-icon img {
+            width: 80px;
+            height: 80px;
+            transition: 0.3s ease-in-out;
+            filter: grayscale(100%);
+            /* default abu-abu */
+        }
+
+        /* Hover efek sesuai warna masing-masing */
+        .social-icon.whatsapp img:hover {
+            filter: grayscale(0%);
+            background-color: #25D366;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .social-icon.instagram img:hover {
+            filter: grayscale(0%);
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border-radius: 20%;
+            padding: 10px;
+        }
+
+        .social-icon.youtube img:hover {
+            filter: grayscale(0%);
+            background-color: #FF0000;
+            border-radius: 15%;
+            padding: 10px;
+        }
+
+        .social-icon.twitter img:hover {
+            filter: grayscale(0%);
+            background-color: #1DA1F2;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .social-icon.facebook img:hover {
+            filter: grayscale(0%);
+            background-color: #0165fd;
+            border-radius: 10%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- Tambahkan logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo Sekolah">
+                Nama Sekolah
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="homepage-skanesa.html">Beranda</a>
+                    </li>
+                    <!-- Dropdown Tentang Kami -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tentangKamiDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Tentang Kami
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil-skanesa.html">Profil Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi-&-misi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="struktur.html">Struktur Organisasi</a></li>
+                        </ul>
+                    </li>
+                    <!-- Dropdown Informasi -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="informasiDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Informasi
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#fasilitas">Fasilitas</a></li>
+                            <li><a class="dropdown-item" href="#jurusan">Jurusan</a></li>
+                            <li><a class="dropdown-item" href="#ekstrakurikuler">Ekstrakurikuler</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ppdb">PPDB</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news">News</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>STRUKTUR ORGANISASI <span class="text-warning">SEKOLAH</span></h1>
+            <p>
+                <a href="homepage-skanesa.html">BERANDA</a> >>
+                <a href="struktur.html" class="active">STRUKTUR ORGANISASI</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Navigasi -->
+    <section class="data">
+        <button class="tombol aktif" onclick="tampil(event,'guru')">Guru</button>
+        <button class="tombol" onclick="tampil(event,'staff')">Staff</button>
+        <button class="tombol" onclick="tampil(event,'siswa')">Siswa</button>
+        <button class="tombol" onclick="tampil(event,'kelas')">Kelas</button>
+        <button class="tombol" onclick="tampil(event,'alumni')">Alumni</button>
+    </section>
+
+    <!-- Search -->
+    <div class="search-bar">
+        <input type="text" id="cari" placeholder="Cari nama guru, staff, siswa, kelas, atau alumni..."
+            onkeyup="pencarian()">
+    </div>
+
+    <!-- Guru -->
+    <section id="guru" class="konten aktif">
+        <div class="cards list">
+
+            <!-- contoh 1 guru -->
+            <div class="card">
+                <img src="guru1.jpg" alt="Rina S.Pd" class="foto">
+                <div class="info">
+                    <h4 class="nama">Rina S.Pd</h4>
+                    <p>Matematika</p>
+                </div>
+            </div>
+            <!-- dst sesuai jumlah guru -->
+        </div>
+        <div class="pagination"></div>
+    </section>
+
+    <!-- Staff -->
+    <section id="staff" class="konten">
+        <div class="cards list">
+
+            <div class="card">
+                <img src="staff1.jpg" alt="Andi" class="foto">
+                <div class="info">
+                    <h4 class="nama">Andi</h4>
+                    <p>Kepegawaian</p>
+                </div>
+            </div>
+            <!-- dst. tambahkan sesuai jumlah staff -->
+        </div>
+        <div class="pagination"></div>
+    </section>
+
+    <!-- SISWA -->
+    <section id="siswa" class="konten">
+        <table class="list">
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td class="nama">Ahmad Syafii</td>
+                <td>
+                    <!-- Trigger modal -->
+                    <label for="modal-siswa1" class="tombol-detail">Detail</label>
+                </td>
+            </tr>
+        </table>
+        <div class="pagination"></div>
+    </section>
+
+    <!-- Modal Siswa 1 -->
+    <input type="checkbox" id="modal-siswa1" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3>Detail Siswa</h3>
+            <p><strong>Nama:</strong> Ahmad Syafii</p>
+            <p><strong>Alamat:</strong> Jl. Merdeka No. 10</p>
+            <p><strong>No. HP:</strong> 0812-xxxx-xxxx</p>
+            <label for="modal-siswa1" class="close">Tutup</label>
+        </div>
+    </div>
+
+    <!-- KELAS -->
+    <section id="kelas" class="konten">
+        <table class="list">
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td class="nama">Kelas X IPA</td>
+                <td>
+                    <label for="modal-kelas1" class="tombol-detail">Detail</label>
+                </td>
+            </tr>
+        </table>
+        <div class="pagination"></div>
+    </section>
+
+    <!-- Modal Kelas 1 -->
+    <input type="checkbox" id="modal-kelas1" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3>Detail Kelas</h3>
+            <p><strong>Nama Kelas:</strong> X IPA</p>
+            <p><strong>Wali Kelas:</strong> Bpk. Andi</p>
+            <p><strong>Jumlah Siswa:</strong> 32</p>
+            <p><strong>Ketua Kelas:</strong> Ahmad</p>
+            <label for="modal-kelas1" class="close">Tutup</label>
+        </div>
+    </div>
+
+    <!-- ALUMNI -->
+    <section id="alumni" class="konten">
+        <button class="daftar-alumni" onclick="toggleForm()">+ Daftarkan Nama Alumni</button>
+
+        <div id="formAlumni">
+            <input type="text" id="namaAlumni" placeholder="Masukkan nama alumni...">
+            <input type="number" id="tahunAlumni" placeholder="Tahun Lulus...">
+            <button onclick="daftarAlumni()">Daftar</button>
+        </div>
+
+        <table id="tabelAlumni" class="list">
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Thn Lulus</th>
+                <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td class="nama">Amelia Syara Silviani</td>
+                <td>2021</td>
+                <td><label for="modal-alumni1" class="tombol-detail">Detail</label></td>
+            </tr>
+        </table>
+        <div class="pagination"></div>
+    </section>
+
+    <!-- Modal Alumni 1 -->
+    <input type="checkbox" id="modal-alumni1" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3>Detail Alumni</h3>
+            <p><strong>Nama:</strong> Amelia Syara Silviani</p>
+            <p><strong>Tahun Lulus:</strong> 2021</p>
+            <p><strong>Jurusan:</strong> IPA</p>
+            <p><strong>Tahun Ajaran:</strong> 2018/2019</p>
+            <p><strong>Pekerjaan:</strong> Mahasiswa</p>
+            <label for="modal-alumni1" class="close">Tutup</label>
+        </div>
+    </div>
+
+
+
+    <!-- ===== FOOTER SECTION ===== -->
+    <footer id="footer" class="bg-dark text-white pt-5">
+
+        <!-- Sosial Media -->
+        <div class="container text-center mb-4">
+            <div class="row justify-content-center">
+                <!-- WhatsApp -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://wa.me/6281234567890" target="_blank" class="social-icon whatsapp">
+                        <img src="whatsapp.jpeg" alt="WhatsApp" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Instagram -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://instagram.com/" target="_blank" class="social-icon instagram">
+                        <img src="instagram.jpeg" alt="Instagram" class="img-fluid">
+                    </a>
+                </div>
+                <!-- YouTube -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://youtube.com/" target="_blank" class="social-icon youtube">
+                        <img src="youtube.jpeg" alt="YouTube" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Twitter -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://twitter.com/" target="_blank" class="social-icon twitter">
+                        <img src="twitter.jpeg" alt="Twitter" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Facebook -->
+                <div class="col-6 col-md-2 mb-3">
+                    <a href="https://facebook.com/" target="_blank" class="social-icon facebook">
+                        <img src="facebook.jpeg" alt="Facebook" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="container">
+            <div class="row text-start">
+                <!-- Quick Links -->
+                <div class="col-6 col-md-4 mb-4">
+                    <h5 class="fw-bold">QUICK LINKS</h5>
+                    <ul class="list-unstyled">
+                        <li>☆ Profil Sekolah</li>
+                        <li>☆ Program Akademik</li>
+                        <li>☆ Ekstrakurikuler</li>
+                        <li>☆ Prestasi Siswa</li>
+                        <li>☆ Hubungi Kami</li>
+                    </ul>
+                </div>
+
+                <!-- Tools -->
+                <div class="col-6 col-md-4 mb-4">
+                    <h5 class="fw-bold">TOOLS</h5>
+                    <ul class="list-unstyled">
+                        <li>Beranda</li>
+                        <li>Profil Singkat</li>
+                        <li>Fasilitas</li>
+                        <li>Jurusan</li>
+                        <li>PPDB</li>
+                        <li>Gallery</li>
+                        <li>Berita</li>
+                    </ul>
+                </div>
+
+                <!-- Motto -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="p-3 border rounded">
+                        <h5 class="fw-bold">Nama Sekolah</h5>
+                        <p class="mb-0">
+                            “Terbang Tinggi Bersama Pengetahuan dan Sportivitas.
+                            Nama Sekolah membentuk generasi unggul, disiplin,
+                            dan penuh semangat dalam meraih prestasi akademik maupun non-akademik.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Garis Pemisah -->
+        <hr class="border-secondary my-3">
+
+        <!-- Copyright -->
+        <div class="text-center pb-3">
+            <small>© 2025 Nama Sekolah. All Rights Reserved.</small>
+        </div>
+
+    </footer>
+
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar berubah saat scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const tombol = document.querySelectorAll('.tombol');
+        const konten = document.querySelectorAll('.konten');
+
+        // Fungsi untuk menampilkan tab
+        function tampil(event, id) {
+            konten.forEach(k => {
+                k.classList.remove('aktif');
+                k.style.display = 'none';
+            });
+            tombol.forEach(t => t.classList.remove('aktif'));
+
+            const target = document.getElementById(id);
+            target.style.display = 'block';
+            setTimeout(() => {
+                target.classList.add('aktif');
+            }, 10);
+            event.target.classList.add('aktif');
+
+            setupPagination();
+        }
+
+        // Fungsi pencarian hanya dalam tab aktif
+        function pencarian() {
+            const input = document.getElementById("cari").value.toLowerCase();
+            const aktifSection = document.querySelector(".konten.aktif");
+            const elemen = aktifSection.querySelectorAll(".nama");
+
+            elemen.forEach(e => {
+                const item = e.closest("tr") || e.closest(".card");
+                if (e.textContent.toLowerCase().includes(input)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        // Toggle form alumni
+        function toggleForm() {
+            const form = document.getElementById("formAlumni");
+            form.style.display = (form.style.display === "block") ? "none" : "block";
+        }
+
+        // Tambah alumni baru
+        function daftarAlumni() {
+            const nama = document.getElementById("namaAlumni").value.trim();
+            const tahun = document.getElementById("tahunAlumni").value.trim();
+            if (!nama || !tahun) return;
+
+            const tabel = document.getElementById("tabelAlumni");
+            const no = tabel.rows.length;
+
+            const row = tabel.insertRow(-1);
+            row.innerHTML = `<td>${no}</td><td class="nama">${nama}</td><td>${tahun}</td><td><button class="tombol-detail">Detail</button></td>`;
+
+            document.getElementById("namaAlumni").value = "";
+            document.getElementById("tahunAlumni").value = "";
+            setupPagination();
+        }
+
+        // Fungsi untuk setup pagination per tab
+        function setupPagination() {
+            document.querySelectorAll(".konten").forEach(section => {
+                const list = section.querySelector(".list");
+                if (!list) return;
+
+                let items;
+                if (list.classList.contains("cards")) {
+                    items = list.querySelectorAll(".card");
+                } else {
+                    items = list.querySelectorAll("tr:not(:first-child)");
+                }
+
+                const perPage = 10;
+                const totalPages = Math.ceil(items.length / perPage);
+                const pagDiv = section.querySelector(".pagination");
+                pagDiv.innerHTML = "";
+
+                function showPage(page) {
+                    items.forEach((item, i) => {
+                        item.style.display = (i >= (page - 1) * perPage && i < page * perPage) ? "" : "none";
+                    });
+
+                    pagDiv.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+                    const activeBtn = pagDiv.querySelector(`button[data-page='${page}']`);
+                    if (activeBtn) activeBtn.classList.add("active");
+                }
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement("button");
+                    btn.textContent = i;
+                    btn.setAttribute("data-page", i);
+                    btn.onclick = () => showPage(i);
+                    pagDiv.appendChild(btn);
+                }
+
+                if (totalPages > 0) showPage(1);
+            });
+        }
+
+        // Sembunyikan semua tab kecuali yang aktif di awal
+        document.addEventListener("DOMContentLoaded", () => {
+            konten.forEach(k => {
+                if (!k.classList.contains("aktif")) {
+                    k.style.display = "none";
+                } else {
+                    k.style.display = "block";
+                }
+            });
+            setupPagination();
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+<script>
+    var tombol = document.querySelectorAll('.tombol');
+    var konten = document.querySelectorAll('.konten');
+
+    // Fungsi untuk menampilkan tab
+    function tampil(event, id) {
+        for (var i = 0; i < konten.length; i++) {
+            konten[i].classList.remove('aktif');
+            konten[i].style.display = 'none';
+        }
+        for (var j = 0; j < tombol.length; j++) {
+            tombol[j].classList.remove('aktif');
+        }
+
+        var target = document.getElementById(id);
+        target.style.display = 'block';
+        setTimeout(function () {
+            target.classList.add('aktif');
+        }, 10);
+
+        event.target.classList.add('aktif');
+
+        setupPagination();
+    }
+
+    // Fungsi pencarian hanya dalam tab aktif
+    function pencarian() {
+        var input = document.getElementById("cari").value.toLowerCase();
+        var aktifSection = document.querySelector(".konten.aktif");
+        var elemen = aktifSection.querySelectorAll(".nama");
+
+        for (var i = 0; i < elemen.length; i++) {
+            var e = elemen[i];
+            var item = e.closest("tr") || e.closest(".card");
+            if (e.textContent.toLowerCase().indexOf(input) !== -1) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        }
+    }
+
+    // Toggle form alumni
+    function toggleForm() {
+        var form = document.getElementById("formAlumni");
+        form.style.display = (form.style.display === "block") ? "none" : "block";
+    }
+
+    // Tambah alumni baru
+    function daftarAlumni() {
+        var nama = document.getElementById("namaAlumni").value.trim();
+        var tahun = document.getElementById("tahunAlumni").value.trim();
+        if (!nama || !tahun) return;
+
+        var tabel = document.getElementById("tabelAlumni");
+        var no = tabel.rows.length;
+
+        var row = tabel.insertRow(-1);
+        row.innerHTML = '<td>' + no + '</td><td class="nama">' + nama + '</td><td>' + tahun + '</td><td><button class="tombol-detail">Detail</button></td>';
+
+        document.getElementById("namaAlumni").value = "";
+        document.getElementById("tahunAlumni").value = "";
+        setupPagination();
+    }
+
+    // Fungsi untuk setup pagination per tab
+    function setupPagination() {
+        var allSections = document.querySelectorAll(".konten");
+
+        for (var s = 0; s < allSections.length; s++) {
+            var section = allSections[s];
+            var list = section.querySelector(".list");
+            if (!list) continue;
+
+            var items;
+            if (list.classList.contains("cards")) {
+                items = list.querySelectorAll(".card");
+            } else {
+                items = list.querySelectorAll("tr:not(:first-child)");
+            }
+
+            var perPage = 10;
+            var totalPages = Math.ceil(items.length / perPage);
+            var pagDiv = section.querySelector(".pagination");
+            pagDiv.innerHTML = "";
+
+            // Fungsi untuk menampilkan halaman
+            (function (items, pagDiv) {
+                function showPage(page) {
+                    for (var k = 0; k < items.length; k++) {
+                        if (k >= (page - 1) * perPage && k < page * perPage) {
+                            items[k].style.display = "";
+                        } else {
+                            items[k].style.display = "none";
+                        }
+                    }
+
+                    var buttons = pagDiv.querySelectorAll("button");
+                    for (var b = 0; b < buttons.length; b++) {
+                        buttons[b].classList.remove("active");
+                    }
+                    var activeBtn = pagDiv.querySelector("button[data-page='" + page + "']");
+                    if (activeBtn) activeBtn.classList.add("active");
+                }
+
+                for (var i = 1; i <= totalPages; i++) {
+                    (function (pageNum) {
+                        var btn = document.createElement("button");
+                        btn.textContent = pageNum;
+                        btn.setAttribute("data-page", pageNum);
+                        btn.onclick = function () {
+                            showPage(pageNum);
+                        };
+                        pagDiv.appendChild(btn);
+                    })(i);
+                }
+
+                if (totalPages > 0) showPage(1);
+            })(items, pagDiv);
+        }
+    }
+
+    // Jalankan saat dokumen dimuat
+    document.addEventListener("DOMContentLoaded", function () {
+        for (var i = 0; i < konten.length; i++) {
+            if (!konten[i].classList.contains("aktif")) {
+                konten[i].style.display = "none";
+            } else {
+                konten[i].style.display = "block";
+            }
+        }
+        setupPagination();
+    });
+</script>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagination ES5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    ul.items {
+      list-style: none;
+      padding: 0;
+    }
+    ul.items li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .pagination button {
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 8px 12px;
+      margin: 0 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .pagination button.active {
+      background: #007BFF;
+      color: #fff;
+      border-color: #007BFF;
+    }
+    .pagination button:disabled {
+      background: #eee;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Contoh Pagination</h2>
+  <ul id="itemList" class="items"></ul>
+
+  <div id="pagination" class="pagination"></div>
+
+  <script>
+    // Data contoh (20 item)
+    var items = [];
+    for (var i = 1; i <= 20; i++) {
+      items.push("Item " + i);
+    }
+
+    var currentPage = 1;
+    var itemsPerPage = 5;
+    var totalPages = Math.ceil(items.length / itemsPerPage);
+
+    function renderItems() {
+      var list = document.getElementById("itemList");
+      list.innerHTML = "";
+
+      var start = (currentPage - 1) * itemsPerPage;
+      var end = start + itemsPerPage;
+      var pageItems = items.slice(start, end);
+
+      for (var i = 0; i < pageItems.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = pageItems[i];
+        list.appendChild(li);
+      }
+    }
+
+    function renderPagination() {
+      var container = document.getElementById("pagination");
+      container.innerHTML = "";
+
+      // Tombol Prev
+      var prevBtn = document.createElement("button");
+      prevBtn.textContent = "Prev";
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = function () {
+        if (currentPage > 1) {
+          currentPage--;
+          update();
+        }
+      };
+      container.appendChild(prevBtn);
+
+      // Tombol nomor halaman
+      for (var i = 1; i <= totalPages; i++) {
+        var btn = document.createElement("button");
+        btn.textContent = i;
+        if (i === currentPage) {
+          btn.className = "active";
+        }
+        btn.setAttribute("data-page", i);
+        btn.onclick = function () {
+          currentPage = parseInt(this.getAttribute("data-page"), 10);
+          update();
+        };
+        container.appendChild(btn);
+      }
+
+      // Tombol Next
+      var nextBtn = document.createElement("button");
+      nextBtn.textContent = "Next";
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = function () {
+        if (currentPage < totalPages) {
+          currentPage++;
+          update();
+        }
+      };
+      container.appendChild(nextBtn);
+    }
+
+    function update() {
+      renderItems();
+      renderPagination();
+    }
+
+    // Inisialisasi
+    update();
+  </script>
+</body>
+</html>
+
+// Fungsi untuk tampilkan section sesuai tombol diklik
+function tampil(event, kategori) {
+    var i, konten, tombol;
+    
+    // Sembunyikan semua konten
+    konten = document.getElementsByClassName('konten');
+    for (i = 0; i < konten.length; i++) {
+        konten[i].classList.remove('aktif');
+    }
+    
+    // Hilangkan kelas aktif pada semua tombol
+    tombol = document.getElementsByClassName('tombol');
+    for (i = 0; i < tombol.length; i++) {
+        tombol[i].classList.remove('aktif');
+    }
+    
+    // Tampilkan konten sesuai kategori dan aktifkan tombol
+    document.getElementById(kategori).classList.add('aktif');
+    event.currentTarget.classList.add('aktif');
+    
+    // Reset pencarian saat pindah tab
+    document.getElementById('cari').value = '';
+    pencarian();
+}
+
+// Fungsi pencarian di semua list
+function pencarian() {
+    var input, filter, kategoriAktif, list, i, txtValue;
+    input = document.getElementById('cari');
+    filter = input.value.toLowerCase();
+    
+    // Cari konten yang aktif (visible)
+    var konten = document.getElementsByClassName('konten');
+    for (i = 0; i < konten.length; i++) {
+        if (konten[i].classList.contains('aktif')) {
+            kategoriAktif = konten[i];
+            break;
+        }
+    }
+    if (!kategoriAktif) return; // jika tidak ada aktif, hentikan
+    
+    // Tampilkan atau sembunyikan item sesuai pencarian
+    if (kategoriAktif.tagName.toLowerCase() === 'section') {
+        // Cek apakah list dalam bentuk div.cards.list atau table.list
+        var cards = kategoriAktif.getElementsByClassName('card');
+        if (cards.length > 0) {
+            // Untuk div kartu (guru, staff)
+            for (i = 0; i < cards.length; i++) {
+                txtValue = cards[i].getElementsByClassName('nama')[0].textContent || cards[i].getElementsByClassName('nama')[0].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        } else {
+            // Untuk tabel (siswa, kelas, alumni)
+            var rows = kategoriAktif.getElementsByTagName('tr');
+            for (i = 1; i < rows.length; i++) { // mulai dari 1 agar skip header
+                var td = rows[i].getElementsByClassName('nama')[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Fungsi toggle form alumni
+function toggleForm() {
+    var form = document.getElementById('formAlumni');
+    if (form.style.display === 'block') {
+        form.style.display = 'none';
+    } else {
+        form.style.display = 'block';
+    }
+}
+
+// Fungsi daftar alumni baru
+function daftarAlumni() {
+    var nama = document.getElementById('namaAlumni').value.trim();
+    var tahun = document.getElementById('tahunAlumni').value.trim();
+    if (!nama || !tahun) {
+        alert('Mohon isi nama dan tahun lulus!');
+        return;
+    }
+    
+    var tabel = document.getElementById('tabelAlumni');
+    
+    // Hitung nomor terakhir
+    var no = tabel.rows.length; // sudah ada header
+    
+    // Buat baris baru
+    var newRow = tabel.insertRow(-1);
+    
+    // No
+    var cellNo = newRow.insertCell(0);
+    cellNo.textContent = no;
+    
+    // Nama
+    var cellNama = newRow.insertCell(1);
+    cellNama.className = 'nama';
+    cellNama.textContent = nama;
+    
+    // Tahun Lulus
+    var cellTahun = newRow.insertCell(2);
+    cellTahun.textContent = tahun;
+    
+    // Aksi (detail) - buat tombol detail kosong, kamu bisa tambahkan modal sendiri jika perlu
+    var cellAksi = newRow.insertCell(3);
+    cellAksi.innerHTML = '-';
+    
+    // Reset input
+    document.getElementById('namaAlumni').value = '';
+    document.getElementById('tahunAlumni').value = '';
+    
+    alert('Alumni berhasil didaftarkan!');
+    
+    // Hide form otomatis
+    toggleForm();
+}

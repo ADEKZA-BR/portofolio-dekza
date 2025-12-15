@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jurusan SMK</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .menu-btn {
+      background-color: #6495ed;
+      color: white;
+      margin: 5px;
+    }
+    .menu-btn:hover {
+      background-color: #4c7edb;
+      color: white;
+    }
+    .jurusan-section {
+      display: none;
+      margin-top: 30px;
+    }
+    .jurusan-section.active {
+      display: block;
+    }
+    .jurusan-img {
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .jurusan-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4" style="color:#6495ed;">Jurusan di Sekolah Kami</h2>
+  
+  <!-- Menu Button -->
+  <div class="text-center">
+    <button class="btn menu-btn" onclick="showJurusan('tkj')">TKJ</button>
+    <button class="btn menu-btn" onclick="showJurusan('dkv')">DKV</button>
+    <button class="btn menu-btn" onclick="showJurusan('dpib')">DPIB</button>
+    <button class="btn menu-btn" onclick="showJurusan('tkr')">TKR</button>
+    <button class="btn menu-btn" onclick="showJurusan('tsm')">TSM</button>
+  </div>
+
+  <!-- TKJ -->
+  <div id="jurusan-tkj" class="jurusan-section active">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/500x300" class="img-fluid jurusan-img" alt="Jurusan TKJ">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:#6495ed;">Teknik Komputer dan Jaringan (TKJ)</h4>
+        <p>Jurusan TKJ mempelajari cara merakit komputer, mengelola jaringan, serta mengamankan data dan sistem. Lulusan TKJ siap bekerja di bidang IT dan jaringan komputer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DKV -->
+  <div id="jurusan-dkv" class="jurusan-section">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/500x300" class="img-fluid jurusan-img" alt="Jurusan DKV">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:#6495ed;">Desain Komunikasi Visual (DKV)</h4>
+        <p>Jurusan DKV mempelajari desain grafis, ilustrasi, fotografi, dan media kreatif. Lulusan mampu bekerja di industri kreatif, periklanan, dan multimedia.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DPIB -->
+  <div id="jurusan-dpib" class="jurusan-section">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/500x300" class="img-fluid jurusan-img" alt="Jurusan DPIB">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:#6495ed;">Desain Pemodelan dan Informasi Bangunan (DPIB)</h4>
+        <p>Jurusan DPIB mempelajari teknik gambar bangunan, perencanaan konstruksi, dan pemodelan 3D. Lulusan siap terjun di dunia arsitektur dan konstruksi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TKR -->
+  <div id="jurusan-tkr" class="jurusan-section">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/500x300" class="img-fluid jurusan-img" alt="Jurusan TKR">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:#6495ed;">Teknik Kendaraan Ringan (TKR)</h4>
+        <p>Jurusan TKR mempelajari perawatan dan perbaikan kendaraan bermotor. Lulusan memiliki kompetensi di bidang otomotif dan perbengkelan.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TSM -->
+  <div id="jurusan-tsm" class="jurusan-section">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/500x300" class="img-fluid jurusan-img" alt="Jurusan TSM">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:#6495ed;">Teknik Sepeda Motor (TSM)</h4>
+        <p>Jurusan TSM fokus pada perawatan, perbaikan, dan modifikasi sepeda motor. Lulusan siap bekerja di bengkel resmi maupun industri otomotif.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showJurusan(nama) {
+  var sections = document.getElementsByClassName('jurusan-section');
+  for (var i = 0; i < sections.length; i++) {
+    sections[i].classList.remove('active');
+  }
+  document.getElementById('jurusan-' + nama).classList.add('active');
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
